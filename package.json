@@ -3,7 +3,7 @@
   "version": "1.0.1",
   "private": true,
   "dependencies": {
-    "@magnolia/react-editor": "^1.1.0-beta2",
+    "@magnolia/react-editor": "^1.2.1",
     "current-git-branch": "^1.1.0",
     "react": "^16.10.2",
     "react-dom": "^16.10.2",
