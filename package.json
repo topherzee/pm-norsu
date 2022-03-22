@@ -1,9 +1,9 @@
 {
-  "name": "react-minimal",
-  "version": "1.0.1",
+  "name": "hello-saas",
+  "version": "1.0.2",
   "private": true,
   "dependencies": {
-    "@magnolia/react-editor": "^1.2.1",
+    "@magnolia/react-editor": "1.2.1",
     "current-git-branch": "^1.1.0",
     "react": "^16.10.2",
     "react-dom": "^16.10.2",

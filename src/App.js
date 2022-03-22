@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react';
+import React from 'react';
 import { BrowserRouter, Switch, Route } from 'react-router-dom';
 import PageLoader from './helpers/PageLoader';
 import Navigation from './components/Navigation';

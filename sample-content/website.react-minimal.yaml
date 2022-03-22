@@ -68,3 +68,33 @@
       'richText': '<p>Extra content.</p>
 
         '
+  'contact':
+    'jcr:primaryType': 'mgnl:page'
+    'jcr:uuid': '1836a8dd-1dbe-451e-9ab1-b2a6f245d403'
+    'mgnl:created': 2022-03-22T10:56:44.487Z
+    'mgnl:createdBy': 'user@magnolia-cms.com'
+    'mgnl:lastModified': 2022-03-22T10:56:49.064Z
+    'mgnl:lastModifiedBy': 'user@magnolia-cms.com'
+    'mgnl:template': 'react-minimal-lm:pages/contact'
+    'title': 'Contact Us'
+    'main':
+      'jcr:primaryType': 'mgnl:area'
+      'jcr:uuid': '89d8d449-6382-4837-995f-a6a05076d287'
+      'mgnl:created': 2022-03-22T10:57:13.591Z
+      'mgnl:createdBy': 'user@magnolia-cms.com'
+      'mgnl:lastModified': 2022-03-22T10:57:13.591Z
+      'mgnl:lastModifiedBy': 'user@magnolia-cms.com'
+      '0':
+        'jcr:primaryType': 'mgnl:component'
+        'jcr:uuid': '807b2e8f-a884-4db8-bf5f-14cda36b2b58'
+        'mgnl:created': 2022-03-22T10:57:13.598Z
+        'mgnl:createdBy': 'user@magnolia-cms.com'
+        'mgnl:lastModified': 2022-03-22T10:57:13.599Z
+        'mgnl:lastModifiedBy': 'user@magnolia-cms.com'
+        'mgnl:template': 'spa-lm:components/paragraph'
+        'richText': '<p>We&#39;d like to hear from you!</p>
+
+
+          <p>+41 12 34 567 89 00</p>
+
+          '
