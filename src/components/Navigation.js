@@ -5,15 +5,19 @@ import { getAPIBase, getLanguages, getCurrentLanguage, changeLanguage } from '..
 function renderLanguages() {
   const currentLanguage = getCurrentLanguage();
 
-  return (
-    <div className="languages">
-      {getLanguages().map((lang) => (
-        <span key={`lang-${lang}`} data-active={currentLanguage === lang} onClick={() => changeLanguage(lang)}>
-          {lang}
-        </span>
-      ))}
-    </div>
-  );
+  return null;
+
+  // Languages not yet supported on SaaS.
+
+  // return (
+  //   <div className="languages">
+  //     {getLanguages().map((lang) => (
+  //       <span key={`lang-${lang}`} data-active={currentLanguage === lang} onClick={() => changeLanguage(lang)}>
+  //         {lang}
+  //       </span>
+  //     ))}
+  //   </div>
+  // );
 }
 
 function Navigation() {
@@ -23,7 +27,7 @@ function Navigation() {
     async function fetchNav() {
       const apiBase = getAPIBase();
 
-      const url = apiBase + process.env.REACT_APP_MGNL_API_NAV + process.env.REACT_APP_MGNL_APP_BASE;
+      const url = apiBase + process.env.REACT_APP_MGNL_API_NAV + process.env.REACT_APP_MGNL_APP_BASE + '?subid_token=' + process.env.REACT_APP_MGNL_SUB_ID;
 
       const response = await fetch(url);
       const data = await response.json();

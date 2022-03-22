@@ -1,5 +1,8 @@
 title: 'React: Basic'
-url: http://localhost:3000
+
+baseUrl: http://localhost:3000
+routeTemplate: '/{language}{{@path}}'
+
 dialog: spa-lm:pages/basic
 
 renderType: spa
