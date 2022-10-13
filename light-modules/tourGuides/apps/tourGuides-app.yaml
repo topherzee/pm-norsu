@@ -1,0 +1,14 @@
+!content-type:tourGuides-app
+name: tourGuides-app
+
+# Optionally override any of the app configuration supplied by the content type.
+# subApps:
+#   detail:
+#     editor:
+#       form:
+#         tabs:
+#           default:
+#
+#             fields:
+#               - name: title
+#                 rows: 5
