@@ -1,5 +1,5 @@
 $type: deliveryEndpoint_v2
-# includeSystemProperties: false
+includeSystemProperties: true
 depth: 5
 nodeTypeMappings:
   pages:
