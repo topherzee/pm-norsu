@@ -1,10 +1,14 @@
-$type: deliveryEndpoint_v2
-includeSystemProperties: true
-depth: 5
-nodeTypeMappings:
-  pages:
-    $type: pagesResolver_v2
-workspace: website
+$type: pagesDeliveryEndpoint_v2
+depth: 1
+# includeSystemProperties: false
+
+# $type: deliveryEndpoint_v2
+# includeSystemProperties: true
+# depth: 5
+# nodeTypeMappings:
+#   pages:
+#     $type: pagesResolver_v2
+# workspace: website
 
 # class: info.magnolia.rest.delivery.jcr.v2.JcrDeliveryEndpointDefinition
 # workspace: website

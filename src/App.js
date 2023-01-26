@@ -9,9 +9,9 @@ function App(props) {
 
     return (
     <BrowserRouter basename={getRouterBasename()}>
-      {/* <header>
+      <header>
         <Navigation />
-      </header> */}
+      </header>
 
       <div className="container">
         <Switch>

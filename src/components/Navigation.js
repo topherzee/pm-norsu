@@ -27,14 +27,18 @@ function Navigation() {
     async function fetchNav() {
       const apiBase = getAPIBase();
 
-      const url = apiBase + process.env.REACT_APP_MGNL_API_NAV + process.env.REACT_APP_MGNL_APP_BASE + '?subid_token=' + process.env.REACT_APP_MGNL_SUB_ID;
+      const baseUrl = apiBase + process.env.REACT_APP_MGNL_API_NAV + process.env.REACT_APP_MGNL_APP_BASE;
+      const url = `${baseUrl}?subid_token=${process.env.REACT_APP_MGNL_SUB_ID}`;
+      const subUrl = `${baseUrl}@nodes?subid_token=${process.env.REACT_APP_MGNL_SUB_ID}`;
 
       const response = await fetch(url);
       const data = await response.json();
-      let items = data['@nodes'].map((nodeName) => {
-        return data[nodeName];
-      });
-      setNavItems([data, ...items]);
+
+      const subRes = await fetch(subUrl);
+      const childNodesData = await subRes.json();
+      // JCR returns an array, but Norsu returns object with more info
+      const childNodes = childNodesData.results ? childNodesData.results : childNodesData;
+      setNavItems([data, ...childNodes]);
     }
 
     if (navItems.length < 1) {
