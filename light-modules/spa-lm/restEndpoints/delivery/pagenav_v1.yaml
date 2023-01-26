@@ -1,11 +1,19 @@
-class: info.magnolia.rest.delivery.jcr.v2.JcrDeliveryEndpointDefinition
-workspace: website
-rootPath: /
-depth: 2
+$type: deliveryEndpoint_v2
 includeSystemProperties: false
-bypassWorkspaceAcls: true
-limit: 50
-nodeTypes:
-  - mgnl:page
-childNodeTypes:
-  - mgnl:page
+depth: 5
+nodeTypeMappings:
+  pages:
+    $type: pagesResolver_v2
+workspace: website
+
+# class: info.magnolia.rest.delivery.jcr.v2.JcrDeliveryEndpointDefinition
+# workspace: website
+# rootPath: /
+# depth: 2
+# includeSystemProperties: false
+# bypassWorkspaceAcls: true
+# limit: 50
+# nodeTypes:
+#   - mgnl:page
+# childNodeTypes:
+#   - mgnl:page
