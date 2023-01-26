@@ -1,6 +1,6 @@
 $type: pagesDeliveryEndpoint_v2
 depth: 1
-# includeSystemProperties: false
+includeSystemProperties: false
 
 # $type: deliveryEndpoint_v2
 # includeSystemProperties: true
