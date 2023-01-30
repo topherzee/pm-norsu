@@ -5,7 +5,7 @@ routeTemplate: '/{language}{{@path}}'
 dialog: spa-lm:pages/basic
 
 renderType: spa
-class: info.magnolia.rendering.spa.renderer.SpaRenderableDefinition
+$type: spa 
 
 areas:
   main:
