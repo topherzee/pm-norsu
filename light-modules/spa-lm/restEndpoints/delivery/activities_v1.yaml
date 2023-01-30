@@ -1,2 +1,3 @@
-$type: deliveryEndpoint_v2
+class: info.magnolia.rest.delivery.jcr.v2.JcrDeliveryEndpointDefinition
 workspace: activities
+bypassWorkspaceAcls: true

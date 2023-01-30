@@ -1,11 +1,21 @@
-$type: pagesDeliveryEndpoint_v2
-depth: 5
-includeSystemProperties: true
+class: info.magnolia.rest.delivery.jcr.v2.JcrDeliveryEndpointDefinition
+workspace: website
+depth: 10
+bypassWorkspaceAcls: true
+systemProperties:
+ - mgnl:lastModified
+ - mgnl:created
+ - mgnl:template
 
-# $type: deliveryEndpoint_v2
-# includeSystemProperties: true
-# depth: 5
-# nodeTypeMappings:
-#   pages:
-#     $type: pagesResolver_v2
-# workspace: website
+nodeTypes:
+  - mgnl:page
+childNodeTypes:
+  - mgnl:area
+  - mgnl:component
+  - mgnl:contentNode
+
+references:
+  - name: assetReference
+    propertyName: image
+    referenceResolver:
+      class: info.magnolia.rest.reference.dam.AssetReferenceResolverDefinition
