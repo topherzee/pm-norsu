@@ -17,7 +17,7 @@ model:
       required: false
     testimonial:
       type: richText
-      label: Testimonial
+      label: Testimonial 2
       i18n: true
       required: false
 
