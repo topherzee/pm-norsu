@@ -2,6 +2,7 @@ datasource:
   $type: norsuContentTypeDatasource
   workspace: activities
   autoCreate: true
+
 model:
   nodeType: activity
   properties:
@@ -14,9 +15,9 @@ model:
       label: Description
       i18n: true
       required: false
-    content:
+    testimonial:
       type: richText
-      label: Content
+      label: Testimonial
       i18n: true
       required: false
 
