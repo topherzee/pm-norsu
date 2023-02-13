@@ -4,12 +4,12 @@ includeSystemProperties: true
 
 referenceDepth: 3
 references:
-  # - name: activityReference
-  #   propertyName: activity
-  #   referenceResolver:
-  #     $type: norsuReferenceResolver
-  #     targetWorkspace: activities
-  #     expand: true
+  - name: activityReference
+    propertyName: activity
+    referenceResolver:
+      $type: norsuReferenceResolver
+      targetWorkspace: activities
+      expand: true
   - name: imageReference
     propertyName: image
     referenceResolver:

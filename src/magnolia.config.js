@@ -19,7 +19,7 @@ const config = {
     "spa-lm:components/expander": Expander,
     "spa-lm:components/list": List,
     "spa-lm:components/listItem": Item,
-    "spa-lm:components/Activity": Activity,
+    "spa-lm:components/activity": Activity,
   },
 };
 
