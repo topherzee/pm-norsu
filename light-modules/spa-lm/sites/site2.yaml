@@ -1,0 +1,15 @@
+templates:
+  prototype:
+    baseUrl: http://localhost:3000
+    routeTemplate: '/{language}{{@path}}'
+    $type: spaPrototype
+    # areas:
+    #   main:
+    #     title: Main Area
+    #     availableComponents:
+    #       Paragraph:
+    #         id: spa-lm:components/paragraph
+mappings:
+  website:
+    handlePrefix: '/site-two'
+    repository: ''

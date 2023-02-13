@@ -1,11 +1,12 @@
 title: 'React: Contact'
-baseUrl: http://localhost:3000
-routeTemplate: '/{language}{{@path}}'
+# baseUrl: http://localhost:3000
+# routeTemplate: '/{language}{{@path}}'
 
 dialog: spa-lm:pages/basic
 
-renderType: spa
-class: info.magnolia.rendering.spa.renderer.SpaRenderableDefinition
+$type: siteSpa
+# renderType: spa
+# class: info.magnolia.rendering.spa.renderer.SpaRenderableDefinition
 
 areas:
   main:
