@@ -1,24 +1,25 @@
 # $type: pagesDeliveryEndpoint_v2
-depth: 5
-includeSystemProperties: true
+
 
 $type: deliveryEndpoint_v2
+depth: 5
+includeSystemProperties: true
 nodeTypeMappings:
   pages:
     $type: pagesResolver_v2
 workspace: website
 
-referenceDepth: 5
+referenceDepth: 3
 references:
-  - name: tourReference
-    propertyName: tours
-    referenceResolver:
-      $type: norsuReferenceResolver
-      targetWorkspace: tours
-      expand: true
+  # - name: tourReference
+  #   propertyName: tours
+  #   referenceResolver:
+  #     $type: norsuReferenceResolver
+  #     targetWorkspace: tours
+  #     expand: true
   - name: image
     propertyName: image
     referenceResolver:
       $type: assetReferenceResolver
-      assetRenditions:
-        - 320x240
+      # assetRenditions:
+      #   - 320x240

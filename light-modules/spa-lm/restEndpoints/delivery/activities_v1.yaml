@@ -1,2 +1,10 @@
 $type: deliveryEndpoint_v2
 workspace: activities
+
+references:
+  - name: image
+    propertyName: image
+    referenceResolver:
+      $type: assetReferenceResolver
+      assetRenditions:
+        - 640x480
