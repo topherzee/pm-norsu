@@ -1,13 +1,13 @@
-# $type: pagesDeliveryEndpoint_v2
+$type: pagesDeliveryEndpoint_v2
 
 
-$type: deliveryEndpoint_v2
+# $type: deliveryEndpoint_v2
 depth: 5
 includeSystemProperties: true
-nodeTypeMappings:
-  pages:
-    $type: pagesResolver_v2
-workspace: website
+# nodeTypeMappings:
+#   pages:
+#     $type: pagesResolver_v2
+# workspace: website
 
 referenceDepth: 3
 references:
@@ -21,5 +21,4 @@ references:
     propertyName: image
     referenceResolver:
       $type: assetReferenceResolver
-      # assetRenditions:
-      #   - 320x240
+
