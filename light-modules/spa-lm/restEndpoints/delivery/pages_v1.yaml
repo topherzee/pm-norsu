@@ -7,3 +7,18 @@ nodeTypeMappings:
   pages:
     $type: pagesResolver_v2
 workspace: website
+
+referenceDepth: 5
+references:
+  - name: tourReference
+    propertyName: tours
+    referenceResolver:
+      $type: norsuReferenceResolver
+      targetWorkspace: tours
+      expand: true
+  - name: image
+    propertyName: image
+    referenceResolver:
+      $type: assetReferenceResolver
+      assetRenditions:
+        - 320x240
