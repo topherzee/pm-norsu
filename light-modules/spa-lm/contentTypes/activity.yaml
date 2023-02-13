@@ -20,5 +20,8 @@ model:
       label: Testimonial 2
       i18n: true
       required: false
+    image:
+      type: asset
+      label: Image
 
 
