@@ -1,11 +1,9 @@
-$type: pagesDeliveryEndpoint_v2
+# $type: pagesDeliveryEndpoint_v2
 depth: 5
 includeSystemProperties: true
 
-# $type: deliveryEndpoint_v2
-# includeSystemProperties: true
-# depth: 5
-# nodeTypeMappings:
-#   pages:
-#     $type: pagesResolver_v2
-# workspace: website
+$type: deliveryEndpoint_v2
+nodeTypeMappings:
+  pages:
+    $type: pagesResolver_v2
+workspace: website
