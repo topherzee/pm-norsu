@@ -10,6 +10,8 @@ model:
       label: Name
       i18n: true
       required: true
+    location:
+      type: reference:location  
     description:
       type: richText
       label: Description
