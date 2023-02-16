@@ -11,5 +11,5 @@ templates:
     #         id: spa-lm:components/paragraph
 mappings:
   website:
-    handlePrefix: '/site-one'
+    handlePrefix: '/react-minimal'
     repository: ''
