@@ -1,5 +1,5 @@
 datasource:
-  $type: norsuContentTypeDatasource
+  $type: contentTypeDatasource
   workspace: activities
   autoCreate: true
 
