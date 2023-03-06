@@ -1,53 +1,49 @@
-import React from 'react';
-import config from '../magnolia.config';
-import { getAPIBase, getLanguages, removeCurrentLanguage, getCurrentLanguage, getVersion } from './AppHelpers';
+import React from "react";
+import config from "../magnolia.config";
+import { getAPIBase, getLanguages } from "./AppHelpers";
 
-import { EditablePage } from '@magnolia/react-editor';
-import { EditorContextHelper } from '@magnolia/react-editor';
+import { EditablePage } from "@magnolia/react-editor";
+import { EditorContextHelper } from "@magnolia/react-editor";
 
 class PageLoader extends React.Component {
   state = {};
-
-  getPagePath = () => {
-    const languages = getLanguages();
-    const nodeName = process.env.REACT_APP_MGNL_APP_BASE;
-    const currentLanguage = getCurrentLanguage();
-    let path = nodeName + window.location.pathname.replace(new RegExp('(.*' + nodeName + '|.html)', 'g'), '');
-
-    if (currentLanguage !== languages[0]) {
-      path = removeCurrentLanguage(path, currentLanguage);
-      path += '?lang=' + currentLanguage;
-    }
-
-    return path;
-  };
 
   loadPage = async (force) => {
     // Bail out if already loaded content.
     if (!force && this.state.pathname === window.location.pathname) return;
 
     const apiBase = getAPIBase();
+    console.log("apiBase:", apiBase);
+    const languages = getLanguages();
+    const spaRootNodePath = process.env.REACT_APP_MGNL_APP_BASE;
+    const magnoliaContext = EditorContextHelper.getMagnoliaContext(
+      window.location.href,
+      spaRootNodePath,
+      languages
+    );
+    console.log("magnoliaContext:", magnoliaContext);
+    const searchParams = new URLSearchParams({
+      subid_token: process.env.REACT_APP_MGNL_SUB_ID,
+    });
+    if (magnoliaContext.searchParams["lang"]) {
+      searchParams.set("lang", magnoliaContext.searchParams["lang"]);
+    }
+    const relativePageURL = `${magnoliaContext.nodePath}?${searchParams}`;
 
-    const pagePath = this.getPagePath();
-    console.log('pagePath:' + pagePath);
-
-     let fullContentPath = `${apiBase}${process.env.REACT_APP_MGNL_API_PAGES}${pagePath}?subid_token=${process.env.REACT_APP_MGNL_SUB_ID}`;
-
-    const pageResponse = await fetch(fullContentPath);
-
+    const fullContentURL = `${apiBase}${process.env.REACT_APP_MGNL_API_PAGES}${relativePageURL}`;
+    const pageResponse = await fetch(fullContentURL);
     const pageJson = await pageResponse.json();
-    console.log('page content: ', pageJson);
+    console.log("page content:", pageJson);
 
-    const templateId = pageJson['mgnl:template'];
-    console.log('templateId:', templateId);
+    const templateId = pageJson["mgnl:template"];
+    console.log("templateId:", templateId);
 
     let templateJson = null;
-    //if (EditorContextHelper.inEditorAsync()) {
-    if (window.location.search.includes('mgnlPreview')) {
-      console.log('apiBase:', apiBase);
-      const templateResponse = await fetch(apiBase + process.env.REACT_APP_MGNL_API_ANNOTATIONS + pagePath + '?subid_token=' + process.env.REACT_APP_MGNL_SUB_ID);
+    if (magnoliaContext.isMagnolia) {
+      const templateAnnotationURL = `${apiBase}${process.env.REACT_APP_MGNL_API_ANNOTATIONS}${relativePageURL}`;
+      const templateResponse = await fetch(templateAnnotationURL);
       templateJson = await templateResponse.json();
-      console.log('annotations: ', templateJson);
+      console.log("annotations:", templateJson);
     }
 
     this.setState({
@@ -58,30 +54,22 @@ class PageLoader extends React.Component {
     });
   };
 
-  inEditorPreview() {
-    const url = window.location.href;
-    const inPreview = url.indexOf('mgnlPreview=true') > 0;
-    console.log('inEditorPreview:' + inPreview);
-    return EditorContextHelper.inEditor() && inPreview;
-  }
-
   componentDidMount() {
-
-    const handler = event => {
+    const handler = (event) => {
       try {
         if (typeof event.data !== "string") {
           return;
         }
         const message = JSON.parse(event.data);
-        if (message.action === 'refresh') {
+        if (message.action === "refresh") {
           this.loadPage(true);
         }
       } catch (e) {
-        console.error("Failed to parse " + event.data)
+        console.error("Failed to parse " + event.data);
       }
     };
 
-    window.addEventListener('message', handler);
+    window.addEventListener("message", handler);
 
     this.loadPage(false);
   }
@@ -92,7 +80,7 @@ class PageLoader extends React.Component {
 
   render() {
     if (this.state.init) {
-      console.log('config:', config);
+      console.log("config:", config);
       //const isDevMode = process.env.NODE_ENV === 'development';
       //console.log("n:" + process.env.NODE_ENV)
 
