@@ -1,3 +1,4 @@
 $type: pagesDeliveryEndpoint_v2
 depth: 2
 includeSystemProperties: false
+limit: 2
