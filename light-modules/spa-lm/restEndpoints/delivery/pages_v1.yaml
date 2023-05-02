@@ -1,15 +1,6 @@
 $type: pagesDeliveryEndpoint_v2
-depth: 5
-includeSystemProperties: true
 
-referenceDepth: 3
 references:
-  - name: activityReference
-    propertyName: activity
-    referenceResolver:
-      $type: norsuReferenceResolver
-      targetWorkspace: activities
-      expand: true
   - name: imageReference
     propertyName: image
     referenceResolver:
