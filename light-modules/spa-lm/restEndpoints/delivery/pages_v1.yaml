@@ -1,6 +1,6 @@
 $type: pagesDeliveryEndpoint_v2
 # depth: 5
-includeSystemProperties: true
+# includeSystemProperties: true
 
 referenceDepth: 3
 references:
