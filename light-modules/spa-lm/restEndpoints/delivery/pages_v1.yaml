@@ -19,4 +19,4 @@ references:
     referenceResolver:
       $type: norsuReferenceResolver
       targetWorkspace: website
-      expand: true
+      expand: false
