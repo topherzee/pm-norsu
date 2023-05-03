@@ -1,14 +1,8 @@
 templates:
   prototype:
-    baseUrl: http://localhost:3000
+    baseUrl: http://${env.BASE_URL}
     routeTemplate: '/{language}{{@path}}'
     $type: spaPrototype
-    # areas:
-    #   main:
-    #     title: Main Area
-    #     availableComponents:
-    #       Paragraph:
-    #         id: spa-lm:components/paragraph
 mappings:
   website:
     handlePrefix: '/react-minimal'

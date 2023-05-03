@@ -7,3 +7,16 @@ references:
     referenceResolver:
       $type: assetReferenceResolver
 
+  - name: activityReference
+    propertyName: activity
+    referenceResolver:
+      $type: norsuReferenceResolver
+      targetWorkspace: activities
+      expand: true
+
+  - name: pageReference
+    propertyName: page
+    referenceResolver:
+      $type: norsuReferenceResolver
+      targetWorkspace: website
+      expand: true

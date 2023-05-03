@@ -1,0 +1,13 @@
+label: Page Teaser
+form:
+  properties:
+    
+    activity:
+      label: Page
+      $type: linkField
+      datasource:
+        $type: contentDatasource
+        rootPath: website
+    text:
+      label: Promotional text
+      $type: textField

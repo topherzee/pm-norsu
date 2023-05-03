@@ -26,6 +26,8 @@ areas:
         id: spa-lm:components/list
       Activity:
         id: spa-lm:components/activity
+      PageTeaser:
+        id: spa-lm:components/pageTeaser
 
   extras:
     title: Extras Area
