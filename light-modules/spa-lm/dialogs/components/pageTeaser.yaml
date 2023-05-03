@@ -2,7 +2,7 @@ label: Page Teaser
 form:
   properties:
     
-    activity:
+    targetPage:
       label: Page
       $type: linkField
       datasource:
