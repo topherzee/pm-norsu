@@ -7,7 +7,7 @@ form:
       $type: linkField
       datasource:
         $type: contentDatasource
-        rootPath: activities
+        workspace: activities
     text:
       label: Promotional text
       $type: textField
