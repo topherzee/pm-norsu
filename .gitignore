@@ -9,6 +9,7 @@ build
 /**/vue-minimal-lm/webresources/
 /**/react-minimal-lm/webresources/
 
+/temp
 
 /**/target
 *.jar
