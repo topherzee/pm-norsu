@@ -8,14 +8,14 @@ references:
       $type: assetReferenceResolver
 
   - name: activityReference
-    propertyName: activity
+    propertyName: targetActivity
     referenceResolver:
       $type: norsuReferenceResolver
       targetWorkspace: activities
       expand: true
 
   - name: pageReference
-    propertyName: page
+    propertyName: targetPage
     referenceResolver:
       $type: norsuReferenceResolver
       targetWorkspace: website

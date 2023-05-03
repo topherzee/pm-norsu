@@ -2,7 +2,7 @@ label: Activity
 form:
   properties:
     
-    activity:
+    targetActivity:
       label: Activity
       $type: linkField
       datasource:
