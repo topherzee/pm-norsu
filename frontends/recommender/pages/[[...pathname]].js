@@ -33,11 +33,13 @@ const SUB_ID = process.env.NEXT_PUBLIC_MGNL_SUB_ID;
 const H = { headers: { "X-subid-token": SUB_ID } };
 
 const fetchAllPages = async () => {
-  const publicFetchUrl = process.env.NEXT_PUBLIC_MGNL_HOST;
+  console.log("fetchAllPages", H);
+  const publicFetchUrl = process.env.NEXT_PUBLIC_MGNL_HOST_PREVIEW;
   const url = `${publicFetchUrl}/delivery/pagenav/v1/recommend@nodes`;
+  console.log("url", url);
   const response = await fetch(url, H);
   const json = await response.json();
-  //console.log("****** json:" + JSON.stringify(json, null, 2));
+  console.log("****** json:" + JSON.stringify(json, null, 2));
   //var results = json.results;
   // json.push({ "@name": "recommend", "@path": "/recommend" });
   // json.push({ "@name": "", "@path": "/recommend" });
@@ -197,23 +199,6 @@ export default function Pathname(props) {
   useEffect(() => {
     async function fetchTemplateAnnotations() {
       console.log("fetchTemplateAnnotations()");
-      //const url = templateAnnotationsApi + pagePath + "&subid_token=" + SUB_ID
-      //const url = "https://delivery-preview.saas.magnolia-cloud.com/environments/main/template-annotations/v1/recommend2/dev1" //&subid_token=td8tdv78a6qyzt6p"
-
-      // FAILS const url = "https://delivery-preview.saas.magnolia-cloud.com/environments/main/template-annotations/v1/recommend2/dev1?subid_token=td8tdv78a6qyzt6p"
-
-      // FAILS const url = "https://delivery-preview.saas.magnolia-cloud.com/environments/main/template-annotations/v1/recommend2/dev1" //&subid_token=td8tdv78a6qyzt6p"
-
-      // WORKS const url = "https://author-" + SUB_ID + ".saas.magnolia-cloud.com/.rest/environments/main/template-annotations/v1/recommend2"
-      //const url = "https://author-" + SUB_ID + ".saas.magnolia-cloud.com/.rest/environments/main/template-annotations/v1/recommend2/dev1" //+ pagePath
-      //WORKS https://author-td8tdv78a6qyzt6p.saas.magnolia-cloud.com/.rest/environments/main/template-annotations/v1/recommend2/dev1?mgnlPreview=false&mgnlChannel=desktop
-      //WORKS https://author-td8tdv78a6qyzt6p.saas.magnolia-cloud.com/.rest/environments/main/template-annotations/v1/recommend2/dev1?STUFFF
-
-      // var url =
-      //   "https://author-" +
-      //   SUB_ID +
-      //   ".saas.magnolia-cloud.com/.rest/environments/main/template-annotations/v1" +
-      //   pagePath;
 
       // var previewBaseUrl = process.env.NEXT_PUBLIC_MGNL_HOST_PREVIEW;
       var previewBaseUrl = "https://delivery-preview.saas.magnolia-cloud.com";

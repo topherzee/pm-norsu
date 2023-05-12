@@ -1,8 +1,7 @@
-class: info.magnolia.rest.delivery.jcr.v2.JcrDeliveryEndpointDefinition
+$type: deliveryEndpoint_v2
 workspace: recommendations
 depth: 2
 limit: 30
-bypassWorkspaceAcls: true
 nodeTypes:
   - mgnl:recommendation
 
@@ -10,20 +9,20 @@ references:
   - name: imageReference
     propertyName: image
     referenceResolver:
-      class: info.magnolia.rest.reference.dam.AssetReferenceResolverDefinition
+      $type: assetReferenceResolver
   - name: typeReference
     propertyName: type
     referenceResolver:
-      class: info.magnolia.rest.reference.jcr.JcrReferenceResolverDefinition
+      $type: norsuReferenceResolver
       targetWorkspace: types
   - name: genresReference
     propertyName: genres
     referenceResolver:
-      class: info.magnolia.rest.reference.jcr.JcrReferenceResolverDefinition
+      $type: norsuReferenceResolver
       targetWorkspace: genres
   - name: commentsReference
     propertyName: comments
     referenceResolver:
-      class: info.magnolia.rest.reference.jcr.JcrReferenceResolverDefinition
+      $type: norsuReferenceResolver
       targetWorkspace: comments
 

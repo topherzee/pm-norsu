@@ -1,8 +1,8 @@
-class: info.magnolia.rest.delivery.jcr.v2.JcrDeliveryEndpointDefinition
+$type: deliveryEndpoint_v2
 workspace: types
 depth: 1
 limit: 50
-bypassWorkspaceAcls: true
+
 nodeTypes:
   - mgnl:type
 
@@ -10,4 +10,4 @@ references:
   - name: iconReference
     propertyName: icon
     referenceResolver:
-      class: info.magnolia.rest.reference.dam.AssetReferenceResolverDefinition
+      $type: assetReferenceResolver

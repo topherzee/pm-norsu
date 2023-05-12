@@ -64,11 +64,6 @@ export default function Pathname(props) {
   // Fetch template annotations only inside Magnolia WYSIWYG
   useEffect(() => {
     async function fetchTemplateAnnotations() {
-      //const url = templateAnnotationsApi + pagePath + "&subid_token=" + SUB_ID
-      //const url = "https://delivery-preview.saas.magnolia-cloud.com/environments/main/template-annotations/v1/recommend2/dev1" //&subid_token=td8tdv78a6qyzt6p"
-      // FAILS const url = "https://delivery-preview.saas.magnolia-cloud.com/environments/main/template-annotations/v1/recommend2/dev1?subid_token=td8tdv78a6qyzt6p"
-      // FAILS const url = "https://delivery-preview.saas.magnolia-cloud.com/environments/main/template-annotations/v1/recommend2/dev1" //&subid_token=td8tdv78a6qyzt6p"
-
       var url =
         "https://author-" +
         SUB_ID +

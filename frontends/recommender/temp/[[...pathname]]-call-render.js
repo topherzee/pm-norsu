@@ -76,18 +76,6 @@ export default function Pathname(props) {
   // Fetch template annotations only inside Magnolia WYSIWYG
   useEffect(() => {
     async function fetchTemplateAnnotations() {
-      //const url = templateAnnotationsApi + pagePath + "&subid_token=" + SUB_ID
-      //const url = "https://delivery-preview.saas.magnolia-cloud.com/environments/main/template-annotations/v1/recommend2/dev1" //&subid_token=td8tdv78a6qyzt6p"
-
-      // FAILS const url = "https://delivery-preview.saas.magnolia-cloud.com/environments/main/template-annotations/v1/recommend2/dev1?subid_token=td8tdv78a6qyzt6p"
-
-      // FAILS const url = "https://delivery-preview.saas.magnolia-cloud.com/environments/main/template-annotations/v1/recommend2/dev1" //&subid_token=td8tdv78a6qyzt6p"
-
-      // WORKS const url = "https://author-" + SUB_ID + ".saas.magnolia-cloud.com/.rest/environments/main/template-annotations/v1/recommend2"
-      //const url = "https://author-" + SUB_ID + ".saas.magnolia-cloud.com/.rest/environments/main/template-annotations/v1/recommend2/dev1" //+ pagePath
-      //WORKS https://author-td8tdv78a6qyzt6p.saas.magnolia-cloud.com/.rest/environments/main/template-annotations/v1/recommend2/dev1?mgnlPreview=false&mgnlChannel=desktop
-      //WORKS https://author-td8tdv78a6qyzt6p.saas.magnolia-cloud.com/.rest/environments/main/template-annotations/v1/recommend2/dev1?STUFFF
-
       var url =
         "https://author-" +
         SUB_ID +
