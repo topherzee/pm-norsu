@@ -1,0 +1,67 @@
+datasource:
+    workspace: recommendations
+    autoCreate: true
+
+model:
+    nodeType: mgnl:recommendation
+    properties:
+    - name: name
+      label: Title
+      type: String
+      required: true
+
+    - name: image
+      label: Image
+      type: asset
+
+    - name: description
+      label: Description
+      type: richText
+      required: true
+
+    - name: type
+      label: Type
+      type: reference:type
+      required: true
+
+    - name: genres
+      label: Genre
+      type: reference:genre
+      multiple: true
+      required: true
+
+    - name: link
+      label: Link
+      type: String
+
+    - name: user
+      label: User
+      type: String
+      required: true
+
+    - name: rating
+      label: Rating
+      type: Decimal
+      required: true
+
+    - name: comments
+      label: Comments
+      type: comment
+      multiple: true
+
+    subModels:
+      - name: comment
+        properties:
+          - name: name
+            label: User
+            type: String
+            required: true
+
+          - name: rating
+            label: Rating
+            type: Decimal
+            required: true
+
+          - name: comment
+            label: Comment
+            type: richText

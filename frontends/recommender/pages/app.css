@@ -1,0 +1,19 @@
+div {
+    padding-top: 5px;
+    padding-right: 5px;
+    padding-bottom: 5px;
+    padding-left: 5px;
+}
+div.withBorder {
+    border: 1px solid black;
+}
+div.comments {
+    margin-top: 15px;
+}
+div.halfSize {
+    width: 50%;
+    display: inline-block;
+}
+html > body {
+    background-color: #eeeeee;
+}

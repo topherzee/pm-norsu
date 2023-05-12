@@ -1,0 +1,14 @@
+name: test-webhooks-site
+url: https://webhook.site/de008183-ea20-41f4-873f-df7c7fbd286b
+method: POST
+
+events:
+  - name: contentPublished
+    eventType: Published
+    entity: Content
+    filter: "@nodeType = 'mgnl:page' or @workspace = 'recommendations'  or @workspace = 'types'  or @workspace = 'genres'"
+
+  - name: contentUnpublished
+    eventType: Unpublished
+    entity: Content
+    filter: "@nodeType = 'mgnl:page' or @workspace = 'recommendations'  or @workspace = 'types'  or @workspace = 'genres'"

@@ -1,0 +1,8 @@
+!content-type:type
+name: types-app
+label: Media types
+
+subApps:
+  detail:
+    label: Media type detail
+    

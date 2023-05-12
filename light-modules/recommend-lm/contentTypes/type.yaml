@@ -1,0 +1,15 @@
+datasource:
+    workspace: types
+    autoCreate: true
+
+model:
+    nodeType: mgnl:type
+    properties:
+    - name: name
+      label: Title
+      type: String
+      required: true
+
+    - name: icon
+      label: Icon
+      type: asset

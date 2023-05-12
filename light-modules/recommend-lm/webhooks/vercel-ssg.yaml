@@ -1,0 +1,13 @@
+name: vercel-ssg
+url: https://api.vercel.com/v1/integrations/deploy/prj_8P3ieMizxSZipmb5jqhSJ9u4CudW/68SgBNgQsX
+method: POST
+
+events:
+  - name: contentPublished
+    eventType: Published
+    entity: Content
+    filter: "@nodeType = 'mgnl:page' or @workspace = 'recommendations'  or @workspace = 'types'  or @workspace = 'genres'"
+  - name: contentUnpublished
+    eventType: Unpublished
+    entity: Content
+    filter: "@nodeType = 'mgnl:page' or @workspace = 'recommendations'  or @workspace = 'types'  or @workspace = 'genres'"

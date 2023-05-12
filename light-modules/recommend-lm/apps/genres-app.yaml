@@ -1,0 +1,7 @@
+!content-type:genre
+name: genres-app
+label: Genres
+
+subApps:
+  detail:
+    label: Genre detail

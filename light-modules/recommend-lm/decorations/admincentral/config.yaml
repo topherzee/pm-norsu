@@ -1,0 +1,11 @@
+layout:
+  rows:
+    - cssClass: editor
+      groups:
+        - name: recommender
+          label: Recommender
+          apps:
+            - genres
+            - recommendations
+            - types
+

@@ -1,0 +1,30 @@
+class: info.magnolia.rendering.spa.renderer.SpaRenderableDefinition
+visible: true
+
+# baseUrl: 'http://localhost:3000'
+# baseUrl: https://try-10-12.vercel.app
+baseUrl: https://magnolia-recommends-2.vercel.app
+# baseUrl: https://try-10-12-2curjct89-magnolia-pd-integration-magnolia-cms.vercel.app/
+# routeTemplate: '/{{@path}}'
+routeTemplate: '/api/preview?slug=/{language}{{@path}}'
+
+
+# dialog: mte:pages/pageProperties
+title: 'Recommend: Basic'
+
+areas:
+  main:
+    title: Main
+    availableComponents:
+      searchResults:
+        id: recommend-lm:components/search/results
+      mediaTypeData:
+        id: recommend-lm:components/mediaType/data
+      mediaTypeList:
+        id: recommend-lm:components/mediaType/list
+      recommendationData:
+        id: recommend-lm:components/recommendation/data
+      hero:
+        id: recommend-lm:components/hero
+      latest:
+        id: recommend-lm:components/latest

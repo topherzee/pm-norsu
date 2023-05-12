@@ -1,0 +1,11 @@
+datasource:
+    workspace: genres
+    autoCreate: true
+
+model:
+    nodeType: mgnl:genre
+    properties:
+    - name: name
+      label: Title
+      type: String
+      required: true
