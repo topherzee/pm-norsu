@@ -1,0 +1,18 @@
+{
+    "tours": [
+        {
+            "name": `${name}`,
+            "duration": `${duration}`,
+            "image": {
+                "link": `${image.link}`,
+                "rendition": `${image.rendition["1600"]}`,
+            },
+            "tourTypes": [
+                {
+                    "displayName": `${displayName}`,
+                    "icon": `${icon.link}`
+                }
+            ]
+        }
+    ]
+}
