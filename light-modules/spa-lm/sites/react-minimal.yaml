@@ -1,6 +1,6 @@
 templates:
   prototype:
-    baseUrl: http://localhost:3000
+    baseUrl: http://localhost:3001
     routeTemplate: '/{language}{{@path}}'
     $type: spaPrototype
 mappings:
