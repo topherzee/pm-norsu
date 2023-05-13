@@ -6,7 +6,7 @@ includeSystemProperties: true
 nodeTypes:
   - mgnl:recommendation
 
-
+referenceDepth: 1
 references:
   - name: imageReference
     propertyName: image
@@ -22,9 +22,9 @@ references:
     referenceResolver:
       $type: norsuReferenceResolver
       targetWorkspace: genres
-  - name: commentsReference
-    propertyName: comments
-    referenceResolver:
-      $type: norsuReferenceResolver
-      targetWorkspace: comments
+  # - name: commentsReference
+  #   propertyName: comments
+  #   referenceResolver:
+  #     $type: norsuReferenceResolver
+  #     targetWorkspace: comments
 
