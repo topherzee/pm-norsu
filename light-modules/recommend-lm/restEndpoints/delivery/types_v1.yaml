@@ -2,10 +2,11 @@ $type: deliveryEndpoint_v2
 workspace: types
 depth: 1
 limit: 50
+includeSystemProperties: true
+nodeTypes:
+  - mgnl:type
 
-# nodeTypes:
-#   - mgnl:type
-
+referenceDepth: 1
 references:
   - name: iconReference
     propertyName: icon

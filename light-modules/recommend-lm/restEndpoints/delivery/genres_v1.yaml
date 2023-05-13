@@ -1,16 +1,9 @@
 $type: deliveryEndpoint_v2
 workspace: genres
+includeSystemProperties: true
+nodeTypes:
+  - mgnl:genre
 
-referenceDepth: 3
-references:
-  - name: imageReference
-    propertyName: image
-    referenceResolver:
-      $type: assetReferenceResolver
-
-# $type: deliveryEndpoint_v2
-# workspace: genres
 # depth: 1
 # limit: 50
-# # nodeTypes:
-# #   - mgnl:genre
+
