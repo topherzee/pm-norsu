@@ -5,7 +5,7 @@ import Grid from "@mui/material/Grid";
 import Box from "@mui/material/Box";
 import { createMarkup } from "../../utils";
 
-const defaultDamUrl = process.env.NEXT_PUBLIC_MGNL_HOST + "/dam/";
+//const defaultDamUrl = process.env.NEXT_PUBLIC_MGNL_HOST + "/dam/";
 
 export default function Hero(props) {
   const { image, title, description } = props;
@@ -20,7 +20,7 @@ export default function Hero(props) {
     backgroundPosition: "center",
   };
   if (image) {
-    s1.backgroundImage = `url(${defaultDamUrl + image})`;
+    s1.backgroundImage = `url(${image["@link"]})`;
   }
 
   return (

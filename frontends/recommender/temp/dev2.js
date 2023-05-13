@@ -30,7 +30,9 @@ const config = {
 const defaultBaseUrl = process.env.NEXT_PUBLIC_MGNL_HOST;
 const pagesApi = defaultBaseUrl + "/delivery/pages/v1";
 const templateAnnotationsApi =
-  defaultBaseUrl + "/environments/main" + "/template-annotations/v1";
+  defaultBaseUrl +
+  "/environments/main" +
+  process.env.NEXT_PUBLIC_MGNL_API_ANNOTATIONS;
 
 const SUB_ID = process.env.NEXT_PUBLIC_MGNL_SUB_ID;
 const H = { headers: { "X-subid-token": SUB_ID } };
@@ -136,7 +138,8 @@ export default function Pathname(props) {
       var url =
         "https://author-" +
         SUB_ID +
-        ".saas.magnolia-cloud.com/.rest/environments/main/template-annotations/v1" +
+        ".saas.magnolia-cloud.com/.rest/environments/main" +
+        process.env.NEXT_PUBLIC_MGNL_API_ANNOTATIONS +
         pagePath;
       url = url.split("?")[0] + "?STUFFF";
 

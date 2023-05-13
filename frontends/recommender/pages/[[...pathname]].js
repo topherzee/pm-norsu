@@ -39,12 +39,12 @@ const fetchAllPages = async () => {
   console.log("url", url);
   const response = await fetch(url, H);
   const json = await response.json();
-  console.log("****** json:" + JSON.stringify(json, null, 2));
+  //console.log("****** json:" + JSON.stringify(json, null, 2));
   //var results = json.results;
   // json.push({ "@name": "recommend", "@path": "/recommend" });
   // json.push({ "@name": "", "@path": "/recommend" });
 
-  return json;
+  return json.results;
 };
 
 //http://localhost:3000/api/preview?slug=/recommend/dev2&mgnlPreview=false&mgnlChannel=desktop
@@ -64,7 +64,15 @@ export async function getStaticPaths() {
 
   paths.push({ params: { pathname: [""] } });
 
-  //console.log("paths:" + JSON.stringify(paths, null, 2));
+  paths = [
+    {
+      params: {
+        pathname: ["recommend"],
+      },
+    },
+  ];
+
+  console.log("paths:" + JSON.stringify(paths, null, 2));
 
   //params: { pathname: [post["@name"]] },
   //p
@@ -84,7 +92,7 @@ export async function getStaticProps(context) {
   //     "-- " +
   //     (context.preview ? context.previewData.query.slug : "")
   // );
-  console.log("Context:" + JSON.stringify(context, null, 2));
+  console.log("getStaticProps. Context:" + JSON.stringify(context, null, 2));
 
   if (context.preview) {
     defaultBaseUrl = process.env.NEXT_PUBLIC_MGNL_HOST_PREVIEW;
@@ -93,7 +101,9 @@ export async function getStaticProps(context) {
   }
   pagesApi = defaultBaseUrl + "/delivery/pages/v1";
   templateAnnotationsApi =
-    defaultBaseUrl + "/environments/main" + "/template-annotations/v1";
+    defaultBaseUrl +
+    "/environments/main" +
+    process.env.NEXT_PUBLIC_MGNL_API_ANNOTATIONS;
 
   var resolvedUrl = context.preview
     ? context.previewData.query.slug
@@ -135,6 +145,7 @@ export async function getStaticProps(context) {
   console.log("a");
   props.page = await pagesRes.json();
   console.log("b");
+  console.log("page content:", JSON.stringify(props.page, null, 2));
   // console.log(props.page);
 
   // const pagesRes = await fetch(setURLSearchParams(pagesApi + pagePath, 'lang=' + currentLanguage));
@@ -204,13 +215,16 @@ export default function Pathname(props) {
       var previewBaseUrl = "https://delivery-preview.saas.magnolia-cloud.com";
 
       var templateAnnotationsApi =
-        previewBaseUrl + "/environments/main" + "/template-annotations/v1";
+        previewBaseUrl +
+        "/environments/main" +
+        process.env.NEXT_PUBLIC_MGNL_API_ANNOTATIONS;
 
       var url = templateAnnotationsApi + pagePath;
-      url = url + "?DSDS";
+      //url = url + "?DSDS";
       //url = url.split("?")[0] + "?STUFFF";
+      url = url + "?subid_token=oktjo3cqkitv325y";
 
-      console.log("templates URL: " + url);
+      console.log("templates URL: ", url, " H:", H);
       const templateAnnotationsRes = await fetch(url, H);
       // const templateAnnotationsRes = await fetch(url);
       const templateAnnotationsJson = await templateAnnotationsRes.json();

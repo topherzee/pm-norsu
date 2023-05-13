@@ -1,4 +1,4 @@
-const HOST = process.env.NEXT_PUBLIC_MGNL_HOST;
+const HOST = process.env.NEXT_PUBLIC_MGNL_HOST_PREVIEW;
 
 const GENRES_URL = HOST + "/delivery/genres/v1";
 const MEDIA_TYPES_URL = HOST + "/delivery/types/v1";
@@ -57,6 +57,8 @@ export const mediaTypeById = async (type, dataCallback) => {
   try {
     var url = MEDIA_TYPES_URL + "?@jcr:uuid=" + type;
     url = url + "&subid_token=" + SUB_ID;
+
+    console.log("mediaTypeById ", url);
     const mediaTypes = await fetch(url).then((res) => res.json());
     //const mediaTypes = await fetch(url, H).then((res) => res.json());
     if (!mediaTypes.results || mediaTypes.results.length !== 1) {
