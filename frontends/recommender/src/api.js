@@ -55,7 +55,7 @@ export const mediaTypeById = async (type, dataCallback) => {
   }
 
   try {
-    var url = MEDIA_TYPES_URL + "?@jcr:uuid=" + type;
+    var url = MEDIA_TYPES_URL + "?@id=" + type;
     url = url + "&subid_token=" + SUB_ID;
 
     console.log("mediaTypeById ", url);
