@@ -3,8 +3,8 @@ workspace: types
 depth: 1
 limit: 50
 
-nodeTypes:
-  - mgnl:type
+# nodeTypes:
+#   - mgnl:type
 
 references:
   - name: iconReference

@@ -2,8 +2,8 @@ $type: deliveryEndpoint_v2
 workspace: recommendations
 depth: 2
 limit: 30
-nodeTypes:
-  - mgnl:recommendation
+# nodeTypes:
+#   - mgnl:recommendation
 
 references:
   - name: imageReference

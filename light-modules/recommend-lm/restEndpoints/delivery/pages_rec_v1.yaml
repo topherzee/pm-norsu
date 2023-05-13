@@ -1,8 +1,6 @@
 $type: pagesDeliveryEndpoint_v2
 referenceDepth: 3
 workspace: website
-nodeTypes:
-  - mgnl:page
-includeSystemProperties: true
+
 limit: 50
 depth: 10

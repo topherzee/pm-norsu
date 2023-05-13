@@ -2,5 +2,5 @@ $type: deliveryEndpoint_v2
 workspace: genres
 depth: 1
 limit: 50
-nodeTypes:
-  - mgnl:genre
+# nodeTypes:
+#   - mgnl:genre
