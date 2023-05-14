@@ -4,7 +4,7 @@ datasource:
     autoCreate: true
 
 model:
-    nodeType: mgnl:type
+    nodeType: rec:type
     properties:
     - name: name
       label: Title

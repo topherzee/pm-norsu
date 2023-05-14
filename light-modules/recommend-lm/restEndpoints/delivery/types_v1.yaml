@@ -4,7 +4,7 @@ depth: 1
 limit: 50
 includeSystemProperties: true
 nodeTypes:
-  - mgnl:type
+  - rec:type
 
 referenceDepth: 1
 references:
