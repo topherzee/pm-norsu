@@ -1,14 +1,12 @@
 $type: deliveryEndpoint_v2
 workspace: types
-depth: 1
-limit: 50
 includeSystemProperties: true
 nodeTypes:
   - rec:type
 
-referenceDepth: 1
-references:
-  - name: iconReference
-    propertyName: icon
-    referenceResolver:
-      $type: assetReferenceResolver
+# referenceDepth: 1
+# references:
+#   - name: iconReference
+#     propertyName: icon
+#     referenceResolver:
+#       $type: assetReferenceResolver
