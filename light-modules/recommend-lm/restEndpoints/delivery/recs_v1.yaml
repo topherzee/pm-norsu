@@ -1,0 +1,26 @@
+$type: deliveryEndpoint_v2
+workspace: recommendations
+depth: 2
+limit: 30
+includeSystemProperties: true
+nodeTypes:
+  - mgnl:recommendation
+
+# referenceDepth: 1
+# references:
+#   - name: imageReference
+#     propertyName: image
+#     referenceResolver:
+#       $type: assetReferenceResolver
+#   - name: typeReference
+#     propertyName: type
+#     referenceResolver:
+#       $type: norsuReferenceResolver
+#       targetWorkspace: types
+#   - name: genresReference
+#     propertyName: genres
+#     referenceResolver:
+#       $type: norsuReferenceResolver
+#       targetWorkspace: genres
+
+
