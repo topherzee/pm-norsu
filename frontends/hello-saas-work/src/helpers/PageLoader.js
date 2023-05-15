@@ -42,6 +42,14 @@ class PageLoader extends React.Component {
     if (magnoliaContext.isMagnolia) {
       const templateAnnotationURL = `${apiBase}${process.env.REACT_APP_MGNL_API_ANNOTATIONS}${relativePageURL}`;
       const templateResponse = await fetch(templateAnnotationURL);
+
+      // const SUB_ID = "oktjo3cqkitv325y";
+      // const H = { headers: { "X-subid-token": SUB_ID } };
+      // //const templateAnnotationURL = `${apiBase}${process.env.REACT_APP_MGNL_API_ANNOTATIONS}${magnoliaContext.nodePath}`;
+      // const templateAnnotationURL =
+      //   "https://delivery-preview.saas.magnolia-cloud.com/norsu-template-annotations/v1/react-minimal";
+      // const templateResponse = await fetch(templateAnnotationURL, H);
+
       templateJson = await templateResponse.json();
       console.log("annotations:", templateJson);
     }

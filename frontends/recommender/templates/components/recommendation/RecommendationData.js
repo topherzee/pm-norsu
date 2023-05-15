@@ -36,7 +36,7 @@ const prepareMediaTypes = (mediaTypesCallback) => {
   mediaTypes((result) => {
     const preparedMediaTypes = result.map((mediaType) => ({
       label: mediaType.name,
-      value: mediaType["@id"],
+      value: mediaType["@metadata"]["@id"],
     }));
     mediaTypesCallback(preparedMediaTypes);
   });
@@ -46,7 +46,10 @@ const prepareGenres = (genresListCallback, genresMapCallback) => {
   genres((result) => {
     const genresMap = new Map();
     const preparedGenres = result.map((genre) => {
-      const mappedGenre = { label: genre.name, value: genre["@id"] };
+      const mappedGenre = {
+        label: genre.name,
+        value: genre["@metadata"]["@id"],
+      };
       genresMap.set(mappedGenre.value, mappedGenre.label);
       return mappedGenre;
     });

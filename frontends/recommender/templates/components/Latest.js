@@ -33,7 +33,7 @@ export default function Latest(props) {
         size="small"
         href={
           mediaType && mediaType.name && mediaType.name !== "All"
-            ? "/mediaTypes" + mediaType["@path"]
+            ? "/mediaTypes" + mediaType["@metadata"]["@path"]
             : "/mediaTypes/all"
         }
       >

@@ -30,7 +30,7 @@ const fetchGenre = async (name) => {
 
 const fetchRecommendations = async (genre) => {
   console.log("fetchRecommendations path:" + genre);
-  const url = `${defaultBaseUrl}/delivery/recommendations/v1/?genres=${genre["@id"]}`;
+  const url = `${defaultBaseUrl}/delivery/recommendations/v1/?genres=${genre["@metadata"]["@id"]}`;
   console.log("fetchRecommendations url:" + url);
   const response = await fetch(url, H);
   const json = await response.json();

@@ -43,7 +43,10 @@ export default function BasicGrid({ results }) {
                       </Typography>
                     </CardContent>
                     <CardActions>
-                      <Button size="small" href={`/genres${item["@path"]}`}>
+                      <Button
+                        size="small"
+                        href={`/genres${item["@metadata"]["@path"]}`}
+                      >
                         See recommendations
                       </Button>
                     </CardActions>

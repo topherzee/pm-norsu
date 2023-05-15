@@ -47,15 +47,18 @@ const fetchAllPages = async () => {
   return json.results;
 };
 
+const ROOT_PAGE = "recommend";
+
 //http://localhost:3000/api/preview?slug=/recommend/dev2&mgnlPreview=false&mgnlChannel=desktop
 //http://localhost:3000/api/preview?slug=/recommend/dev2
 //TODO: Should use paths instead of name in order to support other base paths.
 export async function getStaticPaths() {
   console.log("Main page.getStaticPaths() Start. ");
   const posts = await fetchAllPages();
-  //console.log("****** json2:" + JSON.stringify(posts, null, 2));
+  console.log("****** json2:" + JSON.stringify(posts, null, 2));
+
   const pathsRec = posts.map((post) => ({
-    params: { pathname: ["recommend", post["@name"]] },
+    params: { pathname: [ROOT_PAGE, post["@name"]] },
   }));
   const pathsRaw = posts.map((post) => ({
     params: { pathname: [post["@name"]] },
@@ -64,13 +67,15 @@ export async function getStaticPaths() {
 
   paths.push({ params: { pathname: [""] } });
 
-  paths = [
-    {
-      params: {
-        pathname: ["recommend"],
-      },
-    },
-  ];
+  paths.push({ params: { pathname: [ROOT_PAGE] } });
+
+  // paths = [
+  //   {
+  //     params: {
+  //       pathname: ["recommend"],
+  //     },
+  //   },
+  // ];
 
   console.log("paths:" + JSON.stringify(paths, null, 2));
 

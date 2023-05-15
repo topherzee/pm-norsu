@@ -112,7 +112,7 @@ export const recommendationsByTypeData = async (type, dataCallback) => {
         var url =
           RECOMMENDATIONS_BY_TYPE_URL +
           "?type=" +
-          mediaType["@id"] +
+          mediaType["@metadata"]["@id"] +
           "&orderBy=mgnl:created%20desc&limit=10";
         url = url + "&subid_token=" + SUB_ID;
 

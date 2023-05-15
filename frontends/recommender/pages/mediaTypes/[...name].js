@@ -50,20 +50,20 @@ export async function getStaticPaths() {
 
   const posts = await fetchAllMediaTypes();
 
-  // var paths = posts.map((post) => ({
-  //   params: { name: ["Types", post["@name"]] },
-  // }));
+  var paths = posts.map((post) => ({
+    params: { name: ["Types", post["@metadata"]["@name"]] },
+  }));
 
-  // paths.push({ params: { name: ["all"] } });
+  paths.push({ params: { name: ["all"] } });
 
-  console.log("gSPaths Types A");
-  const paths = posts.map((post) => {
-    const pathAsArray = post["@metadata"]["@path"].substring(1).split("/");
-    return {
-      params: { name: pathAsArray },
-    };
-  });
-  console.log("gSPaths Types B");
+  // console.log("gSPaths Types A");
+  // const paths = posts.map((post) => {
+  //   const pathAsArray = post["@metadata"]["@path"].substring(1).split("/");
+  //   return {
+  //     params: { name: pathAsArray },
+  //   };
+  // });
+  // console.log("gSPaths Types B");
 
   console.log("paths:" + JSON.stringify(paths, null, 2));
 
