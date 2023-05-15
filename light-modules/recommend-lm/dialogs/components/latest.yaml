@@ -8,8 +8,6 @@ form:
     limit:
       label: Limit
       $type: textField
-      type: java.lang.Long
-      converterClass: com.vaadin.data.converter.StringToLongConverter
     type:
       label: Type (Blank for all types)
       description: Leave blank to pull from all types.
@@ -17,7 +15,7 @@ form:
       multiselect: false
       emptySelectionAllowed: true
       datasource:
-        $type: jcrDatasource
+        $type: contentDatasource
         workspace: types
-        rootPath: "/Types"
+        # rootPath: "/Types"
 
