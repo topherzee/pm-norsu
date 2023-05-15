@@ -45,7 +45,7 @@ export default function SearchTeaser({ item }) {
         <Button
           size="small"
           variant="contained"
-          href={`/details${item["@path"]}`}
+          href={`/details${item["@metadata"]["@path"]}`}
         >
           Learn More
         </Button>

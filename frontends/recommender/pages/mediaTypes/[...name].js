@@ -7,11 +7,14 @@ const SUB_ID = process.env.NEXT_PUBLIC_MGNL_SUB_ID;
 const H = { headers: { "X-subid-token": SUB_ID } };
 
 const fetchAllMediaTypes = async () => {
+  console.log("fetchAllMediaTypes");
   const url = `${defaultBaseUrl}/delivery/types/v1/`;
+  console.log(url);
+
   const response = await fetch(url, H);
   const json = await response.json();
 
-  //console.log("****** json:" + JSON.stringify(json,null,2))
+  console.log("MediaTypes ****** json:" + JSON.stringify(json, null, 2));
 
   return json.results;
 };
@@ -27,8 +30,8 @@ const fetchMediaType = async (name) => {
 };
 
 const fetchRecommendations = async (type) => {
-  const url = `${defaultBaseUrl}/delivery/recommendations/v1/?type=${type["@id"]}&orderBy=mgnl:created%20desc`;
-  // console.log("fetchRecommendations:" + url + "&subid_token=" + SUB_ID);
+  const url = `${defaultBaseUrl}/delivery/recommendations/v1/?type=${type["@metadata"]["@id"]}`; //&orderBy=mgnl:created%20desc
+  console.log("fetchRecommendations:" + url + "&subid_token=" + SUB_ID);
   const response = await fetch(url, H);
   const json = await response.json();
   return json.results;
@@ -43,15 +46,26 @@ const fetchAllRecommendations = async () => {
 };
 
 export async function getStaticPaths() {
+  console.log("MediaTypes getStaticPaths Start." + new Date().getSeconds());
+
   const posts = await fetchAllMediaTypes();
 
-  var paths = posts.map((post) => ({
-    params: { name: ["Types", post["@name"]] },
-  }));
+  // var paths = posts.map((post) => ({
+  //   params: { name: ["Types", post["@name"]] },
+  // }));
 
-  paths.push({ params: { name: ["all"] } });
+  // paths.push({ params: { name: ["all"] } });
 
-  //console.log("paths:" + JSON.stringify(paths, null, 2));
+  console.log("gSPaths Types A");
+  const paths = posts.map((post) => {
+    const pathAsArray = post["@metadata"]["@path"].substring(1).split("/");
+    return {
+      params: { name: pathAsArray },
+    };
+  });
+  console.log("gSPaths Types B");
+
+  console.log("paths:" + JSON.stringify(paths, null, 2));
 
   // { fallback: false } means other routes should 404
   return { paths, fallback: false };
@@ -73,10 +87,11 @@ export async function getStaticProps({ params }) {
     props.results = await fetchAllRecommendations();
   } else {
     props.mediaType = await fetchMediaType(decodedName2);
+
     props.results = await fetchRecommendations(props.mediaType);
   }
 
-  // console.log("mediaType:" + JSON.stringify(props.mediaType, null, 2));
+  console.log("mediaType:" + JSON.stringify(props.mediaType, null, 2));
 
   return {
     props,

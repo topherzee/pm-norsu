@@ -7,11 +7,13 @@ const SUB_ID = process.env.NEXT_PUBLIC_MGNL_SUB_ID;
 const H = { headers: { "X-subid-token": SUB_ID } };
 
 const fetchAllGenres = async () => {
+  console.log("fetchALLGenres");
   const url = `${defaultBaseUrl}/delivery/genres/v1/`;
+  console.log(url);
   const response = await fetch(url, H);
   const json = await response.json();
 
-  //console.log("****** json:" + JSON.stringify(json,null,2))
+  console.log("fetchAllGenres ****** json:" + JSON.stringify(json, null, 2));
 
   return json.results;
 };
@@ -27,7 +29,9 @@ const fetchGenre = async (name) => {
 };
 
 const fetchRecommendations = async (genre) => {
+  console.log("fetchRecommendations path:" + genre);
   const url = `${defaultBaseUrl}/delivery/recommendations/v1/?genres=${genre["@id"]}`;
+  console.log("fetchRecommendations url:" + url);
   const response = await fetch(url, H);
   const json = await response.json();
   return json.results;
@@ -36,9 +40,18 @@ const fetchRecommendations = async (genre) => {
 export async function getStaticPaths() {
   const posts = await fetchAllGenres();
 
-  const paths = posts.map((post) => ({
-    params: { name: ["genres", post["@name"]] },
-  }));
+  // const paths = posts.map((post) => ({
+  //   params: { name: ["genres", post["@name"]] },
+  // }));
+
+  console.log("gSPaths Genres A");
+  const paths = posts.map((post) => {
+    const pathAsArray = post["@metadata"]["@path"].substring(1).split("/");
+    return {
+      params: { name: pathAsArray },
+    };
+  });
+  console.log("gSPaths Genres B");
 
   //console.log("paths:" + JSON.stringify(paths,null,2))
 

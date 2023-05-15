@@ -24,11 +24,12 @@ const fetchRec = async (name) => {
 };
 
 const fetchRecs = async () => {
+  console.log("fetchRecs");
   const url = `${defaultBaseUrl}/delivery/recommendations/v1/`;
   const response = await fetch(url, H);
   const json = await response.json();
 
-  //console.log("****** json:" + JSON.stringify(json,null,2))
+  console.log("****** json:" + JSON.stringify(json, null, 2));
 
   return json.results;
 };
@@ -57,11 +58,16 @@ export async function getStaticPaths() {
   // const paths = posts.map((post) => ({
   //   params: { name: [post['@path']] },
   // }))
-  const paths = posts.map((post) => ({
-    params: { name: ["recommendations", post["@name"]] },
-  }));
+  console.log("Detail A");
+  const paths = posts.map((post) => {
+    const pathAsArray = post["@metadata"]["@path"].substring(1).split("/");
+    return {
+      params: { name: pathAsArray },
+    };
+  });
+  console.log("Detail B");
 
-  //console.log("paths:" + JSON.stringify(paths,null,2))
+  console.log("Detail paths:" + JSON.stringify(paths, null, 2));
 
   // { fallback: false } means other routes should 404
   return { paths, fallback: false };
@@ -69,6 +75,7 @@ export async function getStaticPaths() {
 }
 
 export async function getStaticProps({ params }) {
+  console.log("Detail getStaticProps AA");
   // export async function getServerSideProps(context) {
 
   //const posts = await fetchRecs()
@@ -83,7 +90,9 @@ export async function getStaticProps({ params }) {
 
   const name = params.name;
   const decodedName = decodeURI(name);
+  console.log("details gSP B ", decodedName);
   const decodedName2 = decodedName.replace(",", "/");
+  console.log("details gSP C ", decodedName2);
   props = await fetchRec(decodedName2);
   // console.log("props:" + JSON.stringify(props, null, 2));
 
@@ -115,7 +124,10 @@ export default function Detail({
           {name}
         </Typography>
 
-        <Button size="large" href={"/mediaTypes" + type["@path"]}>
+        <Button
+          size="large"
+          href={"/mediaTypes/Types/" + type["@metadata"]["@name"]}
+        >
           {type.name}
         </Button>
 
@@ -123,7 +135,11 @@ export default function Detail({
 
         {genres.map((genre, index) => {
           return (
-            <Button size="large" href={"/genres" + genre["@path"]} key={index}>
+            <Button
+              size="large"
+              href={"/genres/Genres/" + genre["@metadata"]["@name"]}
+              key={index}
+            >
               {genre.name}
             </Button>
           );
