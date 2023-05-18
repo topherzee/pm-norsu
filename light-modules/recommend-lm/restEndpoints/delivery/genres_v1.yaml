@@ -1,7 +1,6 @@
 $type: deliveryEndpoint_v2
 workspace: genres
 includeSystemProperties: true
-
 nodeTypes:
   - mgnl:genre
 
