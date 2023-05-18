@@ -12,6 +12,7 @@ import RecommendationData from "../templates/components/recommendation/Recommend
 import Latest from "../templates/components/Latest";
 import Hero from "../templates/components/Hero";
 import { render } from "react-dom";
+let a = b;
 
 const nodeName = "/recommend";
 const config = {
