@@ -100,7 +100,7 @@ export const latestByType = async (type, dataCallback) => {
 export const recommendationsByTypeData = async (type, dataCallback) => {
   try {
     if (type == "all") {
-      const url =
+      let url =
         RECOMMENDATIONS_BY_TYPE_URL + "?orderBy=mgnl:created%20desc&limit=10";
       url = url + "&subid_token=" + SUB_ID;
 

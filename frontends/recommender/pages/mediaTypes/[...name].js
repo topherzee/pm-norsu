@@ -29,14 +29,16 @@ const fetchMediaType = async (name) => {
   return json;
 };
 
+//TODO Ordering not working. Issue in delivery endpoint.
 const fetchRecommendations = async (type) => {
-  const url = `${defaultBaseUrl}/delivery/recommendations/v1/?type=${type["@metadata"]["@id"]}`; //&orderBy=mgnl:created%20desc
+  const url = `${defaultBaseUrl}/delivery/recommendations/v1/?type=${type["@metadata"]["@id"]}&orderBy=mgnl:created%20desc`;
   console.log("fetchRecommendations:" + url + "&subid_token=" + SUB_ID);
   const response = await fetch(url, H);
   const json = await response.json();
   return json.results;
 };
 
+//TODO Ordering not working. Issue in delivery endpoint.
 const fetchAllRecommendations = async () => {
   const url = `${defaultBaseUrl}/delivery/recommendations/v1/?orderBy=mgnl:created%20desc`;
   // console.log("fetchRecommendations:" + url + "&subid_token=" + SUB_ID);
