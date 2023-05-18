@@ -30,7 +30,10 @@ const fetchGenre = async (name) => {
 
 const fetchRecommendations = async (genre) => {
   console.log("fetchRecommendations path:" + genre);
-  const url = `${defaultBaseUrl}/delivery/recommendations/v1/?genres=${genre["@metadata"]["@id"]}`;
+  // TODO: Do search in a multifield when this is fixed. https://jira.magnolia-cms.com/browse/MGNLREST-699
+  // const url = `${defaultBaseUrl}/delivery/recommendations/v1/?genres=${genre["@metadata"]["@id"]}`;
+  // Workaround: Use a full text search.
+  const url = `${defaultBaseUrl}/delivery/recommendations/v1/?q=${genre["@metadata"]["@id"]}`;
   console.log("fetchRecommendations url:" + url);
   const response = await fetch(url, H);
   const json = await response.json();

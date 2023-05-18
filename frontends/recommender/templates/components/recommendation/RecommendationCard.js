@@ -8,8 +8,8 @@ import {
   Button,
 } from "@mui/material";
 
-export default function SearchTeaser({ item }) {
-  console.log("SearchTeaser:", item);
+export default function RecommendationCard({ item }) {
+  console.log("RecommendationCard:", item);
   if (!item) {
     return null;
   }
