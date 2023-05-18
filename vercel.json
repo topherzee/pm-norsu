@@ -1,3 +1,9 @@
 {
-    "ignoreCommand": "git diff HEAD^ HEAD --quiet ."
-  }
+    "ignoreCommand": "git diff HEAD^ HEAD --quiet .",
+
+    "git": {
+      "deploymentEnabled": {
+        "main": false
+      }
+    }
+}

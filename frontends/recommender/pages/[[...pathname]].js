@@ -4,10 +4,11 @@ import { languages, getCurrentLanguage, setURLSearchParams } from "../utils";
 
 import { EditablePage } from "@magnolia/react-editor";
 import config from "../magnolia.config";
-const nodeName = "/recommend";
+
+const APP_BASE = process.env.NEXT_PUBLIC_MGNL_APP_BASE;
 
 // Use different defaultBaseUrl to point to public instances
-var defaultBaseUrl; //
+var defaultBaseUrl;
 var pagesApi;
 var templateAnnotationsApi;
 
@@ -17,30 +18,27 @@ const H = { headers: { "X-subid-token": SUB_ID } };
 const fetchAllPages = async () => {
   console.log("fetchAllPages", H);
   const publicFetchUrl = process.env.NEXT_PUBLIC_MGNL_HOST_PREVIEW;
-  const url = `${publicFetchUrl}/delivery/pagenav/v1/recommend@nodes`;
+  const url = `${publicFetchUrl}/delivery/pagenav/v1${APP_BASE}@nodes`;
   console.log("url", url);
   const response = await fetch(url, H);
   const json = await response.json();
-  //console.log("****** json:" + JSON.stringify(json, null, 2));
-  //var results = json.results;
+  //console.log("****** json:" , json);
   // json.push({ "@name": "recommend", "@path": "/recommend" });
   // json.push({ "@name": "", "@path": "/recommend" });
 
   return json.results;
 };
 
-const ROOT_PAGE = "recommend";
-
 //http://localhost:3000/api/preview?slug=/recommend/dev2&mgnlPreview=false&mgnlChannel=desktop
 //http://localhost:3000/api/preview?slug=/recommend/dev2
-//TODO: Should use paths instead of name in order to support other base paths.
 export async function getStaticPaths() {
   console.log("Main page.getStaticPaths() Start. ");
   const posts = await fetchAllPages();
-  console.log("****** json2:" + JSON.stringify(posts, null, 2));
+  // console.log("****** json2:" + JSON.stringify(posts, null, 2));
 
+  // Handle both "exact urls"(for in the page editor) and also the urls missing the root page (for in the website).
   const pathsRec = posts.map((post) => ({
-    params: { pathname: [ROOT_PAGE, post["@name"]] },
+    params: { pathname: [APP_BASE.substring(1), post["@name"]] },
   }));
   const pathsRaw = posts.map((post) => ({
     params: { pathname: [post["@name"]] },
@@ -48,9 +46,9 @@ export async function getStaticPaths() {
   var paths = pathsRec.concat(pathsRaw);
 
   paths.push({ params: { pathname: [""] } });
+  paths.push({ params: { pathname: [APP_BASE.substring(1)] } });
 
-  paths.push({ params: { pathname: [ROOT_PAGE] } });
-
+  // Test simple path.
   // paths = [
   //   {
   //     params: {
@@ -61,17 +59,10 @@ export async function getStaticPaths() {
 
   console.log("paths:" + JSON.stringify(paths, null, 2));
 
-  //params: { pathname: [post["@name"]] },
-  //p
-  // const paths = [
-  //   {params: {pathname: ["recommend", "dev2"],},},
-  // ];
-
   // { fallback: false } means other routes should 404
   return { paths, fallback: false };
 }
 
-// export async function getServerSideProps(context) {
 export async function getStaticProps(context) {
   // console.log(
   //   "PREVIEW: " +
@@ -79,7 +70,7 @@ export async function getStaticProps(context) {
   //     "-- " +
   //     (context.preview ? context.previewData.query.slug : "")
   // );
-  console.log("getStaticProps. Context:" + JSON.stringify(context, null, 2));
+  console.log("getStaticProps. Context:", context);
 
   if (context.preview) {
     defaultBaseUrl = process.env.NEXT_PUBLIC_MGNL_HOST_PREVIEW;
@@ -97,8 +88,8 @@ export async function getStaticProps(context) {
     : context.params.pathname
     ? "/" + context.params.pathname.join("/")
     : "";
-  resolvedUrl = resolvedUrl.replace(new RegExp(".*" + nodeName), "");
-  console.log("resolvedUrl: " + resolvedUrl);
+  resolvedUrl = resolvedUrl.replace(new RegExp(".*" + APP_BASE), "");
+  console.log("resolvedUrl: ", resolvedUrl);
   const currentLanguage = getCurrentLanguage(resolvedUrl);
   const isDefaultLanguage = currentLanguage === languages[0];
   //const isPagesApp = context.previewData?.query?.mgnlPreview || null;
@@ -114,16 +105,13 @@ export async function getStaticProps(context) {
 
   // Find out page path in Magnolia
   let pagePath = context.preview
-    ? nodeName + resolvedUrl.replace(new RegExp(".*" + nodeName), "")
-    : nodeName + resolvedUrl;
+    ? APP_BASE + resolvedUrl.replace(new RegExp(".*" + APP_BASE), "")
+    : APP_BASE + resolvedUrl;
 
   console.log("pagePath: " + pagePath);
-  // if (!isDefaultLanguage) {
-  //   pagePath = pagePath.replace("/" + currentLanguage, "");
-  // }
+
   props.pagePath = pagePath;
 
-  // Fetching page content
   // Fetching page content
   const url = pagesApi + pagePath;
   //setURLSearchParams(pagesApi + pagePath, 'lang=' + currentLanguage)
@@ -133,54 +121,6 @@ export async function getStaticProps(context) {
   props.page = await pagesRes.json();
   console.log("b");
   console.log("page content:", JSON.stringify(props.page, null, 2));
-  // console.log(props.page);
-
-  // const pagesRes = await fetch(setURLSearchParams(pagesApi + pagePath, 'lang=' + currentLanguage));
-  // props.page = await pagesRes.json();
-
-  // Fetch template annotations only inside Magnolia WYSIWYG
-  // if (isPagesApp) {
-  //   const templateAnnotationsRes = await fetch(templateAnnotationsApi + pagePath);
-
-  //   props.templateAnnotations = await templateAnnotationsRes.json();
-  // }
-
-  // var params = context.params;
-  // console.log("Main page. getStaticProps Start. ");
-  // //console.log("params: " + JSON.stringify(params, null, 2));
-
-  // console.log("pathname:" + JSON.stringify(params.pathname, null, 2));
-
-  // const name = params.pathname;
-  // const decodedName = decodeURI(name);
-  // var decodedName2 = decodedName.replace(",", "/");
-  // if (decodedName2 === "undefined") {
-  //   decodedName2 = "";
-  // }
-  // console.log("decodedName2 yo: " + decodedName2);
-  // decodedName2 = "/" + decodedName2;
-  // decodedName2 = decodedName2.replace(new RegExp(".*" + nodeName), "");
-
-  // console.log("decodedName2 B: " + decodedName2);
-
-  // // const pagePath = "/" + decodedName2;
-  // const pagePath = nodeName + "/" + decodedName2;
-  // console.log("pagePath: " + pagePath);
-
-  // const isPagesApp = true; //context.query?.mgnlPreview || null;
-  // let props = {
-  //   isPagesApp,
-  //   isPagesAppEdit: isPagesApp === "false",
-  //   pagePath: pagePath,
-  // };
-
-  // global.mgnlInPageEditor = props.isPagesAppEdit;
-
-  // // Fetching page content
-  // const url = pagesApi + props.pagePath;
-  // console.log("page: " + url);
-  // const pagesRes = await fetch(url, H);
-  // props.page = await pagesRes.json();
 
   console.log("Main page. gSSP End." + new Date().getSeconds());
 
@@ -198,8 +138,7 @@ export default function Pathname(props) {
     async function fetchTemplateAnnotations() {
       console.log("fetchTemplateAnnotations()");
 
-      // var previewBaseUrl = process.env.NEXT_PUBLIC_MGNL_HOST_PREVIEW;
-      var previewBaseUrl = "https://delivery-preview.saas.magnolia-cloud.com";
+      var previewBaseUrl = process.env.NEXT_PUBLIC_MGNL_HOST_PREVIEW;
 
       var templateAnnotationsApi =
         previewBaseUrl +
@@ -207,13 +146,12 @@ export default function Pathname(props) {
         process.env.NEXT_PUBLIC_MGNL_API_ANNOTATIONS;
 
       var url = templateAnnotationsApi + pagePath;
-      //url = url + "?DSDS";
-      //url = url.split("?")[0] + "?STUFFF";
-      url = url + "?subid_token=oktjo3cqkitv325y";
 
+      // TODO Magnoila currentlly does not suppport headers in Browser Calls. CORS errors will resullt.
+      url = url + "?subid_token=" + process.env.NEXT_PUBLIC_MGNL_SUB_ID;
+      // const templateAnnotationsRes = await fetch(url, H);
       console.log("templates URL: ", url, " H:", H);
-      const templateAnnotationsRes = await fetch(url, H);
-      // const templateAnnotationsRes = await fetch(url);
+      const templateAnnotationsRes = await fetch(url);
       const templateAnnotationsJson = await templateAnnotationsRes.json();
 
       setTemplateAnnotations(templateAnnotationsJson);
@@ -225,11 +163,9 @@ export default function Pathname(props) {
   const shouldRenderEditablePage =
     page && (isPagesApp ? templateAnnotations : true);
 
-  // In Pages app wait for template annotations before rendering EditablePage
+  // In Pages app, wait for template annotations before rendering EditablePage
   return (
     <>
-      {/* {props.element} */}
-
       {shouldRenderEditablePage && (
         <EditablePage
           content={page}

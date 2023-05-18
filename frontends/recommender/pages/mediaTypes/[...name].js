@@ -14,7 +14,7 @@ const fetchAllMediaTypes = async () => {
   const response = await fetch(url, H);
   const json = await response.json();
 
-  console.log("MediaTypes ****** json:" + JSON.stringify(json, null, 2));
+  // console.log("MediaTypes ****** json:" + JSON.stringify(json, null, 2));
 
   return json.results;
 };
@@ -22,7 +22,6 @@ const fetchAllMediaTypes = async () => {
 const fetchMediaType = async (name) => {
   console.log("fetchMediaType path:" + name);
   const url = `${defaultBaseUrl}/delivery/types/v1/${name}`;
-  //const url = `${defaultBaseUrl}/delivery/types/v1/Science-Fiction`;
   console.log("mediaType: " + url);
   const response = await fetch(url, H);
   const json = await response.json();
@@ -41,7 +40,7 @@ const fetchRecommendations = async (type) => {
 //TODO Ordering not working. Issue in delivery endpoint.
 const fetchAllRecommendations = async () => {
   const url = `${defaultBaseUrl}/delivery/recommendations/v1/?orderBy=mgnl:created%20desc`;
-  // console.log("fetchRecommendations:" + url + "&subid_token=" + SUB_ID);
+  console.log("fetchRecommendations:" + url + "&subid_token=" + SUB_ID);
   const response = await fetch(url, H);
   const json = await response.json();
   return json.results;
@@ -57,15 +56,6 @@ export async function getStaticPaths() {
   }));
 
   paths.push({ params: { name: ["all"] } });
-
-  // console.log("gSPaths Types A");
-  // const paths = posts.map((post) => {
-  //   const pathAsArray = post["@metadata"]["@path"].substring(1).split("/");
-  //   return {
-  //     params: { name: pathAsArray },
-  //   };
-  // });
-  // console.log("gSPaths Types B");
 
   console.log("paths:" + JSON.stringify(paths, null, 2));
 
@@ -85,11 +75,9 @@ export async function getStaticProps({ params }) {
 
   if (decodedName2 === "all") {
     props.mediaType = { name: "Latest" };
-    // props.mediaType.name = "All";
     props.results = await fetchAllRecommendations();
   } else {
     props.mediaType = await fetchMediaType(decodedName2);
-
     props.results = await fetchRecommendations(props.mediaType);
   }
 

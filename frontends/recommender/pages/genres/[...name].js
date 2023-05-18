@@ -13,7 +13,7 @@ const fetchAllGenres = async () => {
   const response = await fetch(url, H);
   const json = await response.json();
 
-  console.log("fetchAllGenres ****** json:" + JSON.stringify(json, null, 2));
+  // console.log("fetchAllGenres ****** json:" + JSON.stringify(json, null, 2));
 
   return json.results;
 };
@@ -21,7 +21,6 @@ const fetchAllGenres = async () => {
 const fetchGenre = async (name) => {
   console.log("fetchGenre path:" + name);
   const url = `${defaultBaseUrl}/delivery/genres/v1/${name}`;
-  //const url = `${defaultBaseUrl}/delivery/genres/v1/Science-Fiction`;
   console.log("genre: " + url);
   const response = await fetch(url, H);
   const json = await response.json();
@@ -43,19 +42,12 @@ const fetchRecommendations = async (genre) => {
 export async function getStaticPaths() {
   const posts = await fetchAllGenres();
 
-  // const paths = posts.map((post) => ({
-  //   params: { name: ["genres", post["@name"]] },
-  // }));
-
-  console.log("gSPaths Genres A");
   const paths = posts.map((post) => {
     const pathAsArray = post["@metadata"]["@path"].substring(1).split("/");
     return {
       params: { name: pathAsArray },
     };
   });
-  console.log("gSPaths Genres B");
-
   //console.log("paths:" + JSON.stringify(paths,null,2))
 
   // { fallback: false } means other routes should 404

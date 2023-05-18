@@ -6,8 +6,8 @@ import ReviewGrid from "./ReviewGrid";
 
 export default function Latest(props) {
   const { title, type, limit } = props;
-  console.log("Latest: type:" + type);
-  console.log("Latest: Props:  " + JSON.stringify(props, null, 2));
+  // console.log("Latest: type:" + type);
+  // console.log("Latest: Props:  " + JSON.stringify(props, null, 2));
 
   const [recommendations, setRecommendations] = useState([]);
   const [mediaType, setMediaType] = useState(null);

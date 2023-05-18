@@ -16,7 +16,6 @@ const H = { headers: { "X-subid-token": SUB_ID } };
 const fetchRec = async (name) => {
   console.log("fetchRec path:" + name);
   const url = `${defaultBaseUrl}/delivery/recommendations/v1/${name}`;
-  //const url = `${defaultBaseUrl}/delivery/genres/v1/Science-Fiction`;
   console.log("rec: " + url);
   const response = await fetch(url, H);
   const json = await response.json();
@@ -29,7 +28,7 @@ const fetchRecs = async () => {
   const response = await fetch(url, H);
   const json = await response.json();
 
-  console.log("****** json:" + JSON.stringify(json, null, 2));
+  // console.log("****** json:" + JSON.stringify(json, null, 2));
 
   return json.results;
 };
@@ -55,44 +54,29 @@ export async function getStaticPaths() {
   // In production environments, prerender all pages
   // (slower builds, but faster initial page load)
 
-  // const paths = posts.map((post) => ({
-  //   params: { name: [post['@path']] },
-  // }))
-  console.log("Detail A");
   const paths = posts.map((post) => {
     const pathAsArray = post["@metadata"]["@path"].substring(1).split("/");
     return {
       params: { name: pathAsArray },
     };
   });
-  console.log("Detail B");
 
-  console.log("Detail paths:" + JSON.stringify(paths, null, 2));
+  // console.log("Detail paths:" + JSON.stringify(paths, null, 2));
 
   // { fallback: false } means other routes should 404
   return { paths, fallback: false };
-  // return { paths:[], fallback: false }
 }
 
 export async function getStaticProps({ params }) {
-  console.log("Detail getStaticProps AA");
-  // export async function getServerSideProps(context) {
-
-  //const posts = await fetchRecs()
-
-  //console.log("****** posts:" + posts)
-  //console.log("posts:" + JSON.stringify(posts,null,2))
-  // const paths = posts.map((post) => ({
-  //   params: { name: post['@path'] },
-  // }))
+  console.log("Detail getStaticProps");
 
   let props = {};
 
   const name = params.name;
   const decodedName = decodeURI(name);
-  console.log("details gSP B ", decodedName);
+  // console.log("details gSP B ", decodedName);
   const decodedName2 = decodedName.replace(",", "/");
-  console.log("details gSP C ", decodedName2);
+  // console.log("details gSP C ", decodedName2);
   props = await fetchRec(decodedName2);
   // console.log("props:" + JSON.stringify(props, null, 2));
 
