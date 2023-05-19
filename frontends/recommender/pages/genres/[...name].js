@@ -26,7 +26,8 @@ export async function getStaticProps({ params }) {
   const decodedName = decodeURI(name);
   const decodedName2 = decodedName.replace(",", "/");
   props.genre = await fetchGenre(decodedName2);
-  props.results = await fetchRecsForGenre(props.genre);
+  console.log("genre:", props.genre);
+  props.results = await fetchRecsForGenre(props.genre["@metadata"]["@id"]);
 
   return {
     props,

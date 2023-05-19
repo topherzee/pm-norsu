@@ -14,7 +14,7 @@ import { fetchAllGenres } from "../../src/api";
 export async function getStaticProps(context) {
   let props = {};
 
-  props.results = fetchAllGenres();
+  props.results = await fetchAllGenres();
 
   return {
     props,

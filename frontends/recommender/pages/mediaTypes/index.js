@@ -14,7 +14,7 @@ import { fetchAllMediaTypes } from "../../src/api";
 export async function getStaticProps(context) {
   let props = {};
 
-  props.results = fetchAllMediaTypes();
+  props.results = await fetchAllMediaTypes();
 
   return {
     props,

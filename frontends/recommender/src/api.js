@@ -7,19 +7,17 @@ const GENRES_URL = HOST + "/delivery/genres/v1";
 const MEDIA_TYPES_URL = HOST + "/delivery/types/v1";
 const RECOMMENDATIONS_BY_TYPE_URL = HOST + "/delivery/recommendations/v1";
 
-const PAGES_BASE = process.env.NEXT_PUBLIC_MGNL_PAGES_BASE;
-
 const defaultBaseUrl = process.env.NEXT_PUBLIC_MGNL_HOST_PREVIEW;
 
 const SUB_ID = process.env.NEXT_PUBLIC_MGNL_SUB_ID;
 const H = { headers: { "X-subid-token": SUB_ID } };
 
-const magFetch = async (envName, endpoint) => {
+const magFetch = async (endpoint) => {
   console.log("magFetch:", endpoint);
 
   // const envName = currentGitBranch().replace("env/", "");
   // const envName = gitBranch.sync().replace("env/", "");
-
+  const envName = process.env.GIT_BRANCH.replace("env/", "");
   // const envName = "main";
   console.log("magFetch env:", envName);
 
@@ -30,8 +28,10 @@ const magFetch = async (envName, endpoint) => {
     // Get Published content
     baseUrl = process.env.NEXT_PUBLIC_MGNL_HOST;
   }
+  // baseUrl = process.env.NEXT_PUBLIC_MGNL_HOST_PREVIEW;
 
   const url = `${baseUrl}/delivery${endpoint}`;
+  console.log("magFetch url:", url);
   const response = await fetch(url, H);
   const json = await response.json();
 
@@ -49,97 +49,81 @@ const magFetch = async (envName, endpoint) => {
   //     return false;
   //   });
 
-  console.log("****** magFetch:", json);
-  return json;
-};
-
-export const fetchRec = async (name, envName) => {
-  console.log("fetchRec path:" + name);
-  const endpoint = `/recommendations/v1/${name}`;
-  const json = await magFetch(envName, endpoint);
+  // console.log("****** magFetch:", json);
   return json;
 };
 
 export const fetchAllPages = async () => {
   console.log("fetchAllPages", H);
-  const publicFetchUrl = process.env.NEXT_PUBLIC_MGNL_HOST_PREVIEW;
-  const url = `${publicFetchUrl}/delivery/pagenav/v1${PAGES_BASE}@nodes`;
-  console.log("url", url);
-  const response = await fetch(url, H);
-  const json = await response.json();
-  console.log("****** json:", json);
+  const endpoint = `/pagenav/v1${process.env.NEXT_PUBLIC_MGNL_PAGES_BASE}@nodes`;
+  const json = await magFetch(endpoint);
   // json.push({ "@name": "recommend", "@path": "/recommend" });
   // json.push({ "@name": "", "@path": "/recommend" });
 
+  console.log("****** json:", json);
   return json.results;
 };
 
-export const fetchRecs = async (envName) => {
+export const fetchRec = async (name) => {
+  console.log("fetchRec path:" + name);
+  const endpoint = `/recommendations/v1/${name}`;
+  const json = await magFetch(endpoint);
+  return json;
+};
+
+export const fetchRecs = async () => {
   console.log("fetchRecs");
-  const url = `${defaultBaseUrl}/delivery/recommendations/v1/`;
-  //console.log("url", url, H);
-  const response = await fetch(url, H);
-  const json = await response.json();
+  const endpoint = `/recommendations/v1/`;
+  const json = await magFetch(endpoint);
+
   //console.log("****** json:" + JSON.stringify(json, null, 2));
   return json.results;
 };
 
 export const fetchAllGenres = async () => {
   console.log("fetchALLGenres");
-  const url = `${defaultBaseUrl}/delivery/genres/v1/`;
-  console.log(url);
-  const response = await fetch(url, H);
-  const json = await response.json();
+  const endpoint = `/genres/v1/`;
+  const json = await magFetch(endpoint);
   // console.log("fetchAllGenres ****** json:" + JSON.stringify(json, null, 2));
   return json.results;
 };
 
 export const fetchGenre = async (name) => {
   console.log("fetchGenre path:" + name);
-  const url = `${defaultBaseUrl}/delivery/genres/v1/${name}`;
-  console.log("genre: " + url);
-  const response = await fetch(url, H);
-  const json = await response.json();
+  const endpoint = `/genres/v1/${name}`;
+  const json = await magFetch(endpoint);
   return json;
 };
 
-export const fetchRecsForGenre = async (genre) => {
-  console.log("fetchRecsForGenre path:" + genre);
+export const fetchRecsForGenre = async (genreId) => {
+  console.log("fetchRecsForGenre id:", genreId);
   // TODO: Do search in a multifield when this is fixed. https://jira.magnolia-cms.com/browse/MGNLREST-699
-  // const url = `${defaultBaseUrl}/delivery/recommendations/v1/?genres=${genre["@metadata"]["@id"]}`;
+  // const endpoint = `recommendations/v1/?genres=${genreId}`;
   // Workaround: Use a full text search.
-  const url = `${defaultBaseUrl}/delivery/recommendations/v1/?q=${genre["@metadata"]["@id"]}`;
-  console.log("fetchRecommendations url:" + url);
-  const response = await fetch(url, H);
-  const json = await response.json();
+  const endpoint = `/recommendations/v1/?q=${genreId}`;
+  const json = await magFetch(endpoint);
   return json.results;
 };
 
 export const fetchAllMediaTypes = async () => {
   console.log("fetchAllMediaTypes");
-  const url = `${defaultBaseUrl}/delivery/types/v1/`;
-  console.log(url);
-  const response = await fetch(url, H);
-  const json = await response.json();
-  // console.log("MediaTypes ****** json:" + JSON.stringify(json, null, 2));
+  const endpoint = `/types/v1`;
+  const json = await magFetch(endpoint);
   return json.results;
 };
 
 export const fetchMediaType = async (name) => {
   console.log("fetchMediaType path:" + name);
-  const url = `${defaultBaseUrl}/delivery/types/v1/${name}`;
-  console.log("mediaType: " + url);
-  const response = await fetch(url, H);
-  const json = await response.json();
+  const endpoint = `/types/v1/${name}`;
+  const json = await magFetch(endpoint);
   return json;
 };
 
 //TODO Ordering not working. Issue in delivery endpoint.
-export const fetchRecsForMediaType = async (type) => {
-  const url = `${defaultBaseUrl}/delivery/recommendations/v1/?type=${type["@metadata"]["@id"]}&orderBy=mgnl:created%20desc`;
-  console.log("fetchRecommendations:" + url + "&subid_token=" + SUB_ID);
-  const response = await fetch(url, H);
-  const json = await response.json();
+export const fetchRecsForMediaType = async (typeId) => {
+  console.log("fetchRecsForMediaType:", typeId);
+  const endpoint = `/recommendations/v1/?type=${typeId}&orderBy=mgnl:created%20desc`;
+  const json = await magFetch(endpoint);
   return json.results;
 };
 

@@ -40,10 +40,12 @@ export async function getStaticProps({ params }) {
     props.results = await fetchAllRecs();
   } else {
     props.mediaType = await fetchMediaType(decodedName2);
-    props.results = await fetchRecsForMediaType(props.mediaType);
+    props.results = await fetchRecsForMediaType(
+      props.mediaType?.["@metadata"]["@id"]
+    );
   }
 
-  console.log("mediaType:" + JSON.stringify(props.mediaType, null, 2));
+  console.log("mediaType:", props.mediaType);
 
   return {
     props,
@@ -62,6 +64,7 @@ export default function MediaType({ mediaType, results }) {
       >
         {mediaType && mediaType.name}
       </Typography>
+
       {results && results.length > 0 ? (
         <ReviewGrid recommendations={results} />
       ) : (

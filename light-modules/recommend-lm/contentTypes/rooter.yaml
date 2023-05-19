@@ -1,0 +1,12 @@
+#Hack to publish website root node.
+datasource:
+  $type: contentTypeDatasource
+  #workspace: 
+  # autoCreate: true
+model:
+  # nodeType: rooter
+  properties:
+    name:
+      label: Name
+      i18n: true
+      required: true

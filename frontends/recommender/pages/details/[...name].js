@@ -33,9 +33,9 @@ export async function getStaticPaths() {
   // const envName = currentGitBranch();
   // const envName = gitBranch.sync();
   // const envName = process.env.GIT_BRANCH;
-  const envName = "main";
+  // const envName = "main";
 
-  const posts = await fetchRecs(envName);
+  const posts = await fetchRecs();
 
   // Get the paths we want to prerender based on posts
   // In production environments, prerender all pages
@@ -64,6 +64,9 @@ export async function getStaticProps({ params }) {
   // console.log("details gSP B ", decodedName);
   const decodedName2 = decodedName.replace(",", "/");
   // console.log("details gSP C ", decodedName2);
+
+  // const envName = process.env.GIT_BRANCH;
+  // const envName = currentGitBranch();
   props = await fetchRec(decodedName2);
   // console.log("props:" + JSON.stringify(props, null, 2));
 
