@@ -2,42 +2,7 @@ import * as React from "react";
 import { Typography } from "@mui/material";
 import ReviewGrid from "../../templates/components/ReviewGrid";
 
-const defaultBaseUrl = process.env.NEXT_PUBLIC_MGNL_HOST;
-const SUB_ID = process.env.NEXT_PUBLIC_MGNL_SUB_ID;
-const H = { headers: { "X-subid-token": SUB_ID } };
-
-const fetchAllGenres = async () => {
-  console.log("fetchALLGenres");
-  const url = `${defaultBaseUrl}/delivery/genres/v1/`;
-  console.log(url);
-  const response = await fetch(url, H);
-  const json = await response.json();
-
-  // console.log("fetchAllGenres ****** json:" + JSON.stringify(json, null, 2));
-
-  return json.results;
-};
-
-const fetchGenre = async (name) => {
-  console.log("fetchGenre path:" + name);
-  const url = `${defaultBaseUrl}/delivery/genres/v1/${name}`;
-  console.log("genre: " + url);
-  const response = await fetch(url, H);
-  const json = await response.json();
-  return json;
-};
-
-const fetchRecommendations = async (genre) => {
-  console.log("fetchRecommendations path:" + genre);
-  // TODO: Do search in a multifield when this is fixed. https://jira.magnolia-cms.com/browse/MGNLREST-699
-  // const url = `${defaultBaseUrl}/delivery/recommendations/v1/?genres=${genre["@metadata"]["@id"]}`;
-  // Workaround: Use a full text search.
-  const url = `${defaultBaseUrl}/delivery/recommendations/v1/?q=${genre["@metadata"]["@id"]}`;
-  console.log("fetchRecommendations url:" + url);
-  const response = await fetch(url, H);
-  const json = await response.json();
-  return json.results;
-};
+import { fetchGenre, fetchRecsForGenre, fetchAllGenres } from "../../src/api";
 
 export async function getStaticPaths() {
   const posts = await fetchAllGenres();
@@ -61,7 +26,7 @@ export async function getStaticProps({ params }) {
   const decodedName = decodeURI(name);
   const decodedName2 = decodedName.replace(",", "/");
   props.genre = await fetchGenre(decodedName2);
-  props.results = await fetchRecommendations(props.genre);
+  props.results = await fetchRecsForGenre(props.genre);
 
   return {
     props,

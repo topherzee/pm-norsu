@@ -2,49 +2,11 @@ import * as React from "react";
 import { Typography } from "@mui/material";
 import ReviewGrid from "../../templates/components/ReviewGrid";
 
-const defaultBaseUrl = process.env.NEXT_PUBLIC_MGNL_HOST;
-const SUB_ID = process.env.NEXT_PUBLIC_MGNL_SUB_ID;
-const H = { headers: { "X-subid-token": SUB_ID } };
-
-const fetchAllMediaTypes = async () => {
-  console.log("fetchAllMediaTypes");
-  const url = `${defaultBaseUrl}/delivery/types/v1/`;
-  console.log(url);
-
-  const response = await fetch(url, H);
-  const json = await response.json();
-
-  // console.log("MediaTypes ****** json:" + JSON.stringify(json, null, 2));
-
-  return json.results;
-};
-
-const fetchMediaType = async (name) => {
-  console.log("fetchMediaType path:" + name);
-  const url = `${defaultBaseUrl}/delivery/types/v1/${name}`;
-  console.log("mediaType: " + url);
-  const response = await fetch(url, H);
-  const json = await response.json();
-  return json;
-};
-
-//TODO Ordering not working. Issue in delivery endpoint.
-const fetchRecommendations = async (type) => {
-  const url = `${defaultBaseUrl}/delivery/recommendations/v1/?type=${type["@metadata"]["@id"]}&orderBy=mgnl:created%20desc`;
-  console.log("fetchRecommendations:" + url + "&subid_token=" + SUB_ID);
-  const response = await fetch(url, H);
-  const json = await response.json();
-  return json.results;
-};
-
-//TODO Ordering not working. Issue in delivery endpoint.
-const fetchAllRecommendations = async () => {
-  const url = `${defaultBaseUrl}/delivery/recommendations/v1/?orderBy=mgnl:created%20desc`;
-  console.log("fetchRecommendations:" + url + "&subid_token=" + SUB_ID);
-  const response = await fetch(url, H);
-  const json = await response.json();
-  return json.results;
-};
+import {
+  fetchMediaType,
+  fetchRecsForMediaType,
+  fetchAllMediaTypes,
+} from "../../src/api";
 
 export async function getStaticPaths() {
   console.log("MediaTypes getStaticPaths Start." + new Date().getSeconds());
@@ -75,10 +37,10 @@ export async function getStaticProps({ params }) {
 
   if (decodedName2 === "all") {
     props.mediaType = { name: "Latest" };
-    props.results = await fetchAllRecommendations();
+    props.results = await fetchAllRecs();
   } else {
     props.mediaType = await fetchMediaType(decodedName2);
-    props.results = await fetchRecommendations(props.mediaType);
+    props.results = await fetchRecsForMediaType(props.mediaType);
   }
 
   console.log("mediaType:" + JSON.stringify(props.mediaType, null, 2));

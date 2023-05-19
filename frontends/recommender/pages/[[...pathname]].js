@@ -5,7 +5,9 @@ import { languages, getCurrentLanguage, setURLSearchParams } from "../utils";
 import { EditablePage } from "@magnolia/react-editor";
 import config from "../magnolia.config";
 
-const APP_BASE = process.env.NEXT_PUBLIC_MGNL_APP_BASE;
+import { fetchAllPages } from "../src/api";
+
+const PAGES_BASE = process.env.NEXT_PUBLIC_MGNL_PAGES_BASE;
 
 // Use different defaultBaseUrl to point to public instances
 var defaultBaseUrl;
@@ -14,20 +16,6 @@ var templateAnnotationsApi;
 
 const SUB_ID = process.env.NEXT_PUBLIC_MGNL_SUB_ID;
 const H = { headers: { "X-subid-token": SUB_ID } };
-
-const fetchAllPages = async () => {
-  console.log("fetchAllPages", H);
-  const publicFetchUrl = process.env.NEXT_PUBLIC_MGNL_HOST_PREVIEW;
-  const url = `${publicFetchUrl}/delivery/pagenav/v1${APP_BASE}@nodes`;
-  console.log("url", url);
-  const response = await fetch(url, H);
-  const json = await response.json();
-  //console.log("****** json:" , json);
-  // json.push({ "@name": "recommend", "@path": "/recommend" });
-  // json.push({ "@name": "", "@path": "/recommend" });
-
-  return json.results;
-};
 
 //http://localhost:3000/api/preview?slug=/recommend/dev2&mgnlPreview=false&mgnlChannel=desktop
 //http://localhost:3000/api/preview?slug=/recommend/dev2
@@ -38,7 +26,7 @@ export async function getStaticPaths() {
 
   // Handle both "exact urls"(for in the page editor) and also the urls missing the root page (for in the website).
   const pathsRec = posts.map((post) => ({
-    params: { pathname: [APP_BASE.substring(1), post["@name"]] },
+    params: { pathname: [PAGES_BASE.substring(1), post["@name"]] },
   }));
   const pathsRaw = posts.map((post) => ({
     params: { pathname: [post["@name"]] },
@@ -46,7 +34,7 @@ export async function getStaticPaths() {
   var paths = pathsRec.concat(pathsRaw);
 
   paths.push({ params: { pathname: [""] } });
-  paths.push({ params: { pathname: [APP_BASE.substring(1)] } });
+  paths.push({ params: { pathname: [PAGES_BASE.substring(1)] } });
 
   // Test simple path.
   // paths = [
@@ -63,6 +51,8 @@ export async function getStaticPaths() {
   return { paths, fallback: false };
 }
 
+const fetchPage = async () => {};
+
 export async function getStaticProps(context) {
   // console.log(
   //   "PREVIEW: " +
@@ -77,7 +67,12 @@ export async function getStaticProps(context) {
   } else {
     defaultBaseUrl = process.env.NEXT_PUBLIC_MGNL_HOST;
   }
+
+  //TODO FIx me!
+  defaultBaseUrl = process.env.NEXT_PUBLIC_MGNL_HOST_PREVIEW;
+
   pagesApi = defaultBaseUrl + "/delivery/pages/v1";
+
   templateAnnotationsApi =
     defaultBaseUrl +
     "/environments/main" +
@@ -88,8 +83,9 @@ export async function getStaticProps(context) {
     : context.params.pathname
     ? "/" + context.params.pathname.join("/")
     : "";
-  resolvedUrl = resolvedUrl.replace(new RegExp(".*" + APP_BASE), "");
+  resolvedUrl = resolvedUrl.replace(new RegExp(".*" + PAGES_BASE), "");
   console.log("resolvedUrl: ", resolvedUrl);
+
   const currentLanguage = getCurrentLanguage(resolvedUrl);
   const isDefaultLanguage = currentLanguage === languages[0];
   //const isPagesApp = context.previewData?.query?.mgnlPreview || null;
@@ -105,8 +101,8 @@ export async function getStaticProps(context) {
 
   // Find out page path in Magnolia
   let pagePath = context.preview
-    ? APP_BASE + resolvedUrl.replace(new RegExp(".*" + APP_BASE), "")
-    : APP_BASE + resolvedUrl;
+    ? PAGES_BASE + resolvedUrl.replace(new RegExp(".*" + PAGES_BASE), "")
+    : PAGES_BASE + resolvedUrl;
 
   console.log("pagePath: " + pagePath);
 
@@ -119,6 +115,7 @@ export async function getStaticProps(context) {
   const pagesRes = await fetch(url, H);
   console.log("a");
   props.page = await pagesRes.json();
+
   console.log("b");
   console.log("page content:", JSON.stringify(props.page, null, 2));
 

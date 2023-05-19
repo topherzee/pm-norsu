@@ -17,6 +17,8 @@
     "@magnolia/react-editor": "^1.2.1",
     "@mui/icons-material": "latest",
     "@mui/material": "latest",
+    "current-git-branch": "^1.1.0",
+    "git-branch": "^2.0.1",
     "next": "latest",
     "prop-types": "latest",
     "react": "latest",
@@ -27,4 +29,8 @@
     "eslint": "latest",
     "eslint-config-next": "latest"
   }
+  ,
+  "browser":{
+    "child_process": false
+    }  
 }

@@ -9,17 +9,12 @@ import {
   Typography,
 } from "@mui/material";
 
-const defaultBaseUrl = process.env.NEXT_PUBLIC_MGNL_HOST;
-const SUB_ID = process.env.NEXT_PUBLIC_MGNL_SUB_ID;
-const H = { headers: { "X-subid-token": SUB_ID } };
+import { fetchAllGenres } from "../../src/api";
 
 export async function getStaticProps(context) {
   let props = {};
 
-  const url = `${defaultBaseUrl}/delivery/genres/v1`;
-  const response = await fetch(url, H);
-  const json = await response.json();
-  props.results = json.results;
+  props.results = fetchAllGenres();
 
   return {
     props,

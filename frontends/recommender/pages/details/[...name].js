@@ -7,31 +7,12 @@ import {
   CardActions,
   Button,
 } from "@mui/material";
+
+// const currentGitBranch = require("current-git-branch");
+// const gitBranch = require("git-branch");
 import { createMarkup } from "../../utils";
 
-const defaultBaseUrl = process.env.NEXT_PUBLIC_MGNL_HOST;
-const SUB_ID = process.env.NEXT_PUBLIC_MGNL_SUB_ID;
-const H = { headers: { "X-subid-token": SUB_ID } };
-
-const fetchRec = async (name) => {
-  console.log("fetchRec path:" + name);
-  const url = `${defaultBaseUrl}/delivery/recommendations/v1/${name}`;
-  console.log("rec: " + url);
-  const response = await fetch(url, H);
-  const json = await response.json();
-  return json;
-};
-
-const fetchRecs = async () => {
-  console.log("fetchRecs");
-  const url = `${defaultBaseUrl}/delivery/recommendations/v1/`;
-  const response = await fetch(url, H);
-  const json = await response.json();
-
-  // console.log("****** json:" + JSON.stringify(json, null, 2));
-
-  return json.results;
-};
+import { fetchRec, fetchRecs } from "../../src/api";
 
 export async function getStaticPaths() {
   console.log("Detail getStaticPaths Start." + new Date().getSeconds());
@@ -48,7 +29,13 @@ export async function getStaticPaths() {
     };
   }
 
-  const posts = await fetchRecs();
+  // const envName = currentGitBranch().replace("env/", "");
+  // const envName = currentGitBranch();
+  // const envName = gitBranch.sync();
+  // const envName = process.env.GIT_BRANCH;
+  const envName = "main";
+
+  const posts = await fetchRecs(envName);
 
   // Get the paths we want to prerender based on posts
   // In production environments, prerender all pages
@@ -85,15 +72,21 @@ export async function getStaticProps({ params }) {
   };
 }
 
-export default function Detail({
-  name,
-  description,
-  image,
-  user,
-  type = { name: "default" },
-  genres,
-  link = "default",
-}) {
+export default function Detail(props) {
+  const {
+    name,
+    description,
+    image,
+    user,
+    type = { name: "default" },
+    genres,
+    link = "default",
+  } = props;
+
+  if (props.error) {
+    return "Not found.";
+  }
+
   return (
     <Card>
       <CardMedia component="img" image={image["@link"]} alt={image["@name"]} />
@@ -110,7 +103,7 @@ export default function Detail({
 
         <Button
           size="large"
-          href={"/mediaTypes/Types/" + type["@metadata"]["@name"]}
+          href={"/mediaTypes/Types/" + type["@metadata"]?.["@name"]}
         >
           {type.name}
         </Button>
@@ -121,7 +114,7 @@ export default function Detail({
           return (
             <Button
               size="large"
-              href={"/genres/Genres/" + genre["@metadata"]["@name"]}
+              href={"/genres/Genres/" + genre["@metadata"]?.["@name"]}
               key={index}
             >
               {genre.name}
