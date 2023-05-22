@@ -6,6 +6,7 @@ import {
   fetchMediaType,
   fetchRecsForMediaType,
   fetchAllMediaTypes,
+  fetchAllRecs,
 } from "../../src/api";
 
 export async function getStaticPaths() {

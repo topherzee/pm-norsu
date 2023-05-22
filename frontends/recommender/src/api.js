@@ -15,13 +15,13 @@ const H = { headers: { "X-subid-token": SUB_ID } };
 const magFetch = async (endpoint) => {
   console.log("magFetch:", endpoint);
 
-  // const envName = currentGitBranch().replace("env/", "");
-  // const envName = gitBranch.sync().replace("env/", "");
+  //TODO: How to detect if in pages app - seems like we need Next Context to know.
+  const inPageEditor = true;
+
   const envName = process.env.GIT_BRANCH.replace("env/", "");
   // const envName = "main";
   console.log("magFetch env:", envName);
 
-  const inPageEditor = false;
   // If 'main' environment && not in editor, get published content.
   let baseUrl = process.env.NEXT_PUBLIC_MGNL_HOST_PREVIEW;
   if (envName === "main" && !inPageEditor) {
@@ -57,9 +57,6 @@ export const fetchAllPages = async () => {
   console.log("fetchAllPages", H);
   const endpoint = `/pagenav/v1${process.env.NEXT_PUBLIC_MGNL_PAGES_BASE}@nodes`;
   const json = await magFetch(endpoint);
-  // json.push({ "@name": "recommend", "@path": "/recommend" });
-  // json.push({ "@name": "", "@path": "/recommend" });
-
   console.log("****** json:", json);
   return json.results;
 };

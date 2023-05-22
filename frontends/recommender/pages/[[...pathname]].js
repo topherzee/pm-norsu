@@ -88,7 +88,9 @@ export async function getStaticProps(context) {
 
   const currentLanguage = getCurrentLanguage(resolvedUrl);
   const isDefaultLanguage = currentLanguage === languages[0];
-  //const isPagesApp = context.previewData?.query?.mgnlPreview || null;
+
+  //TODO: Clean up PagesApp Detection.
+  // const isPagesApp = context.previewData?.query?.mgnlPreview || null;
   const isPagesApp = true;
 
   let props = {
