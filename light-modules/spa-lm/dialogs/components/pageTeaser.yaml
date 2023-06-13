@@ -8,6 +8,11 @@ form:
       datasource:
         $type: contentDatasource
         workspace: website
+    targetPage2:
+      label: Page 2
+      $type: pageLinkField
+
+
     text:
       label: Promotional text
       $type: textField
