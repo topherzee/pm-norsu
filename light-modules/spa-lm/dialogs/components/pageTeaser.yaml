@@ -12,6 +12,10 @@ form:
       label: Page 2
       $type: pageLinkField
 
+    targetPage3:
+      label: Page 3
+      $type: pageNorsuLinkField
+
 
     text:
       label: Promotional text
