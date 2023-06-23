@@ -5,8 +5,8 @@ form:
       label: Headline
       $type: textField
       i18n: true
-    text2:
-      label: Test
-      $type: textArea
-      i18n: true
+    # text2:
+    #   label: Test
+    #   $type: textArea
+    #   i18n: true
      
