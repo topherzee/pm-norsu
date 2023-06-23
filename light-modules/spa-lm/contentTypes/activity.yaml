@@ -1,5 +1,5 @@
 datasource:
-  $type: contentTypeDatasource
+  # $type: contentTypeDatasource
   workspace: activities
   autoCreate: true
 
