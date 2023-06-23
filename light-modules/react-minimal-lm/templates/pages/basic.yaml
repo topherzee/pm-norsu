@@ -1,14 +1,12 @@
 title: 'React: Basic'
 
-# baseUrl: http://localhost:3000
-# routeTemplate: '/{language}{{@path}}'
+baseUrl: http://localhost:3000
+routeTemplate: '/{language}{{@path}}'
 
 dialog: spa-lm:pages/basic
 
-$type: siteSpa
-
-# renderType: spa
-# class: info.magnolia.rendering.spa.renderer.SpaRenderableDefinition
+renderType: spa
+class: info.magnolia.rendering.spa.renderer.SpaRenderableDefinition
 
 areas:
   main:
@@ -24,10 +22,6 @@ areas:
         id: spa-lm:components/expander
       List:
         id: spa-lm:components/list
-      Activity:
-        id: spa-lm:components/activity
-      PageTeaser:
-        id: spa-lm:components/pageTeaser
 
   extras:
     title: Extras Area

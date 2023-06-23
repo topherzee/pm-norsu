@@ -1,8 +1,0 @@
-!content-type:location
-name: locations-app
-label: Locations
-
-#Optionally override any of the app configuration supplied by the content type.
-subApps:
-  detail:
-    label: Location Detail

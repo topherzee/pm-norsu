@@ -1,9 +1,2 @@
 $type: deliveryEndpoint_v2
 workspace: activities
-
-referenceDepth: 3
-references:
-  - name: imageReference
-    propertyName: image
-    referenceResolver:
-      $type: assetReferenceResolver

@@ -1,7 +1,5 @@
-import React from 'react';
+import React from "react";
 
-const Headline = props => 
-
-<h2 className="Headline">{props.text}</h2>;
+const Headline = (props) => <h2 className="Headline">{props.text}</h2>;
 
 export default Headline;

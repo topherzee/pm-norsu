@@ -6,8 +6,6 @@ import Paragraph from "./components/Paragraph";
 import Expander from "./components/Expander";
 import List from "./components/List";
 import Item from "./components/Item";
-import Activity from "./components/Activity";
-import PageTeaser from "./components/PageTeaser";
 
 const config = {
   componentMappings: {
@@ -20,8 +18,6 @@ const config = {
     "spa-lm:components/expander": Expander,
     "spa-lm:components/list": List,
     "spa-lm:components/listItem": Item,
-    "spa-lm:components/activity": Activity,
-    "spa-lm:components/pageTeaser": PageTeaser,
   },
 };
 

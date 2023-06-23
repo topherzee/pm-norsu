@@ -1,13 +1,12 @@
-import React from 'react';
-import { BrowserRouter, Switch, Route } from 'react-router-dom';
-import PageLoader from './helpers/PageLoader';
-import Navigation from './components/Navigation';
-import './App.css';
-import { getRouterBasename } from './helpers/AppHelpers';
+import React from "react";
+import { BrowserRouter, Switch, Route } from "react-router-dom";
+import PageLoader from "./helpers/PageLoader";
+import Navigation from "./components/Navigation";
+import "./App.css";
+import { getRouterBasename } from "./helpers/AppHelpers";
 
 function App(props) {
-
-    return (
+  return (
     <BrowserRouter basename={getRouterBasename()}>
       <header>
         <Navigation />
@@ -22,7 +21,7 @@ function App(props) {
       <footer>
         Integer posuere erat a ante venenatis dapibus posuere velit aliquet.
         <br />
-        Copyright © 2020
+        Copyright © {new Date().getFullYear()}
       </footer>
     </BrowserRouter>
   );

@@ -10,11 +10,11 @@ export function getAPIBase() {
 }
 
 export function getLanguages() {
-  return process.env.REACT_APP_MGNL_LANGUAGES.split(' ');
+  return process.env.REACT_APP_MGNL_LANGUAGES.split(" ");
 }
 
 export function removeCurrentLanguage(string, currentLanguage) {
-  return string.replace(new RegExp('/' + currentLanguage + '($|/)'), '/');
+  return string.replace(new RegExp("/" + currentLanguage + "($|/)"), "/");
 }
 
 export function getCurrentLanguage() {
@@ -23,7 +23,7 @@ export function getCurrentLanguage() {
   for (let i = 0; i < languages.length; i++) {
     const language = languages[i];
 
-    if (new RegExp('/' + language + '($|/)').test(window.location.pathname)) {
+    if (new RegExp("/" + language + "($|/)").test(window.location.pathname)) {
       return language;
     }
   }
@@ -40,13 +40,17 @@ export function changeLanguage(newLanguage) {
 
   if (languages[0] !== newLanguage) {
     if (pathname.indexOf(nodeName) > -1) {
-      pathname = pathname.replace(new RegExp(nodeName), '/' + newLanguage + nodeName);
+      pathname = pathname.replace(
+        new RegExp(nodeName),
+        "/" + newLanguage + nodeName
+      );
     } else {
-      pathname = '/' + newLanguage + pathname;
+      pathname = "/" + newLanguage + pathname;
     }
   }
 
-  window.location.href = window.location.origin + pathname + window.location.search;
+  window.location.href =
+    window.location.origin + pathname + window.location.search;
 }
 
 export function getRouterBasename() {
@@ -55,14 +59,14 @@ export function getRouterBasename() {
   var pathname = window.location.pathname;
 
   if (pathname.indexOf(nodeName) > -1) {
-    return pathname.replace(new RegExp(nodeName + '.*'), '') + nodeName;
+    return pathname.replace(new RegExp(nodeName + ".*"), "") + nodeName;
   }
 
   const currentLanguage = getCurrentLanguage();
 
-  return languages[0] === currentLanguage ? '/' : '/' + currentLanguage;
+  return languages[0] === currentLanguage ? "/" : "/" + currentLanguage;
 }
 
 export function getVersion(path) {
-  return new URLSearchParams(path).get('mgnlVersion');
+  return new URLSearchParams(path).get("mgnlVersion");
 }

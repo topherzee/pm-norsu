@@ -10,8 +10,6 @@ model:
       label: Name
       i18n: true
       required: true
-    location:
-      type: reference:location  
     description:
       type: richText
       label: Description
@@ -19,11 +17,8 @@ model:
       required: false
     testimonial:
       type: richText
-      label: Testimonial 2
+      label: Testimonial
       i18n: true
       required: false
-    image:
-      type: asset
-      label: Image
 
 

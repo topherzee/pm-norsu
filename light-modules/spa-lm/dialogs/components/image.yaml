@@ -4,6 +4,3 @@ form:
     image:
       label: Image
       $type: damLinkField
-      # chooser:
-      #   workbenchChooser:
-      #     appName: dam-chooser

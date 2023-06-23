@@ -1,0 +1,100 @@
+'react-minimal':
+  'jcr:primaryType': 'mgnl:page'
+  'jcr:uuid': '95264732-dca3-4f1f-97df-0c0e640e129e'
+  'mgnl:lastModified': 2021-09-29T16:44:39.409Z
+  'mgnl:lastModifiedBy': 'user@magnolia-cms.com'
+  'mgnl:template': 'react-minimal-lm:pages/basic'
+  'title': 'Hello SaaS'
+  'main':
+    'jcr:primaryType': 'mgnl:area'
+    'jcr:uuid': '99f03460-b592-4b60-9008-0da2d73e0933'
+    'mgnl:created': 2021-07-22T13:02:33.132Z
+    'mgnl:createdBy': 'user@magnolia-cms.com'
+    'mgnl:lastModified': 2021-09-29T16:44:13.642Z
+    'mgnl:lastModifiedBy': 'user@magnolia-cms.com'
+    '0':
+      'jcr:primaryType': 'mgnl:component'
+      'jcr:uuid': 'c15fa9d1-98be-4347-9be1-d05ca3103a4c'
+      'mgnl:created': 2021-09-29T16:44:10.425Z
+      'mgnl:createdBy': 'user@magnolia-cms.com'
+      'mgnl:lastModified': 2021-09-29T16:44:13.642Z
+      'mgnl:lastModifiedBy': 'user@magnolia-cms.com'
+      'mgnl:template': 'spa-lm:components/headline'
+      'text': 'Look at you go!'
+    '02':
+      'jcr:primaryType': 'mgnl:component'
+      'jcr:uuid': '3553cde2-d97b-46a5-ae48-a4f034e991be'
+      'mgnl:created': 2021-07-25T20:38:11.732Z
+      'mgnl:createdBy': 'user@magnolia-cms.com'
+      'mgnl:lastModified': 2021-09-29T16:42:49.796Z
+      'mgnl:lastModifiedBy': 'user@magnolia-cms.com'
+      'mgnl:template': 'spa-lm:components/expander'
+      'expanderItems':
+        'jcr:primaryType': 'mgnl:area'
+        'jcr:uuid': '46227c51-1630-42e8-98fa-e2532ab5df35'
+        'mgnl:created': 2021-08-03T19:10:07.707Z
+        'mgnl:createdBy': 'user@magnolia-cms.com'
+        'mgnl:lastModified': 2021-09-29T16:42:49.796Z
+        'mgnl:lastModifiedBy': 'user@magnolia-cms.com'
+        '0':
+          'jcr:primaryType': 'mgnl:component'
+          'jcr:uuid': '471537b4-9ba1-469b-a9a1-5388ebfc8224'
+          'mgnl:created': 2021-09-29T16:41:09.779Z
+          'mgnl:createdBy': 'user@magnolia-cms.com'
+          'mgnl:lastModified': 2021-09-29T16:42:49.796Z
+          'mgnl:lastModifiedBy': 'user@magnolia-cms.com'
+          'mgnl:template': 'spa-lm:components/paragraph'
+          'richText': '<p>Hi.</p>
+
+
+            <p>This is a paragraph component inside an expander component.</p>
+
+            '
+  'extras':
+    'jcr:primaryType': 'mgnl:area'
+    'jcr:uuid': 'b494fcb5-90d6-4f18-adbe-84c8d1087e4f'
+    'mgnl:created': 2021-07-22T13:02:33.188Z
+    'mgnl:createdBy': 'user@magnolia-cms.com'
+    'mgnl:lastModified': 2021-09-29T16:44:39.409Z
+    'mgnl:lastModifiedBy': 'user@magnolia-cms.com'
+    '0':
+      'jcr:primaryType': 'mgnl:component'
+      'jcr:uuid': 'a6f6e584-8fad-4559-af40-728f8175f3e7'
+      'mgnl:created': 2021-09-29T16:45:25.157Z
+      'mgnl:createdBy': 'user@magnolia-cms.com'
+      'mgnl:lastModified': 2021-09-29T16:45:25.157Z
+      'mgnl:lastModifiedBy': 'user@magnolia-cms.com'
+      'mgnl:template': 'spa-lm:components/paragraph'
+      'richText': '<p>Extra content.</p>
+
+        '
+  'contact':
+    'jcr:primaryType': 'mgnl:page'
+    'jcr:uuid': '1836a8dd-1dbe-451e-9ab1-b2a6f245d403'
+    'mgnl:created': 2022-03-22T10:56:44.487Z
+    'mgnl:createdBy': 'user@magnolia-cms.com'
+    'mgnl:lastModified': 2022-03-22T10:56:49.064Z
+    'mgnl:lastModifiedBy': 'user@magnolia-cms.com'
+    'mgnl:template': 'react-minimal-lm:pages/contact'
+    'title': 'Contact Us'
+    'main':
+      'jcr:primaryType': 'mgnl:area'
+      'jcr:uuid': '89d8d449-6382-4837-995f-a6a05076d287'
+      'mgnl:created': 2022-03-22T10:57:13.591Z
+      'mgnl:createdBy': 'user@magnolia-cms.com'
+      'mgnl:lastModified': 2022-03-22T10:57:13.591Z
+      'mgnl:lastModifiedBy': 'user@magnolia-cms.com'
+      '0':
+        'jcr:primaryType': 'mgnl:component'
+        'jcr:uuid': '807b2e8f-a884-4db8-bf5f-14cda36b2b58'
+        'mgnl:created': 2022-03-22T10:57:13.598Z
+        'mgnl:createdBy': 'user@magnolia-cms.com'
+        'mgnl:lastModified': 2022-03-22T10:57:13.599Z
+        'mgnl:lastModifiedBy': 'user@magnolia-cms.com'
+        'mgnl:template': 'spa-lm:components/paragraph'
+        'richText': '<p>We&#39;d like to hear from you!</p>
+
+
+          <p>+41 12 34 567 89 00</p>
+
+          '
