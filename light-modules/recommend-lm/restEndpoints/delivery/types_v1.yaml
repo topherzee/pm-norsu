@@ -10,3 +10,5 @@ references:
     propertyName: icon
     referenceResolver:
       $type: assetReferenceResolver
+      renditions: 
+        - 320x240
